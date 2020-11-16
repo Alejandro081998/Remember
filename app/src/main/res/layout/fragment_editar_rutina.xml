@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCelesteC"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <!--<Button
+                android:id="@+id/button5"
+                android:layout_width="148dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/boton_rojo"
+                android:text="Eliminar Rutina"
+                android:textSize="12sp"
+                android:textStyle="bold" />-->
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tipo_rut"
+                android:layout_gravity="center"
+                android:textColor="@color/colorBlanco"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/tipos_rutina_editar"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></Spinner>
+
+            <EditText
+                android:id="@+id/txt_titulo_rutina_editar"
+                android:layout_width="304dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/marco_celeste"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_gravity="center"
+                android:hint="@string/txTitulo"
+                android:textAlignment="center"
+                android:textColor="@color/colorCelesteD"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="5sp"
+                android:layout_gravity="center"
+                android:text="@string/Horario"
+                android:textColor="@color/colorBlanco"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TimePicker
+                android:id="@+id/hora_editar"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"></TimePicker>
+
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:layout_gravity="center"
+                android:text="@string/Dias"
+                android:textColor="@color/colorBlanco"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="@drawable/marco_celeste">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10sp">
+
+                        <CheckBox
+                            android:id="@+id/chkLunes_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="40sp"
+                            android:text="@string/Lunes"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/chkViernes_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Viernes"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/chkMartes_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="40sp"
+                            android:text="@string/Martes"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/chkSabado_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Sabado"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/chkMiercoles_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="40sp"
+                            android:text="@string/Miercoles"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/chkDomingo_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Domingo"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10sp">
+
+                        <CheckBox
+                            android:id="@+id/chkJueves_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="40sp"
+                            android:text="@string/Jueves"
+                            android:textColor="@color/colorCelesteD"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                </TableLayout>
+
+            </RadioGroup>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="91dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_eliminar_rutina"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/boton_rojo"
+                    android:text="@string/Eliminar" />
+
+                <Button
+                    android:id="@+id/btn_guardar_rutina"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/boton_verde"
+                    android:text="Guardar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

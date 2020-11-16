@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@mipmap/profile"
+            android:title="@string/item_perfil" />
+        <item
+            android:id="@+id/nav_notificaciones"
+            android:icon="@mipmap/notificaciones"
+            android:title="@string/item_notificaciones" />
+        <item
+            android:id="@+id/nav_rutinas"
+            android:icon="@mipmap/business"
+            android:title="@string/item_rutinas" />
+    </group>
+    <group android:checkableBehavior="single" android:id="@+id/seguimiento">
+        <item
+            android:visible="false"
+            android:id="@+id/nav_seguimiento"
+            android:icon="@mipmap/segui"
+            android:title="@string/item_seguimiento" />
+    </group>
+
+    <item android:title="Mas....">
+        <menu>
+            <item
+                android:id="@+id/nav_ayuda"
+                android:icon="@mipmap/information"
+                android:title="@string/item_ayuda" />
+            <item
+                android:id="@+id/nav_cerrar"
+                android:icon="@mipmap/logout"
+                android:title="@string/cerrar_sesion" />
+        </menu>
+    </item>
+
+</menu>

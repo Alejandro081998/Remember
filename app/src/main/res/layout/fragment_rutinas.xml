@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCelesteC"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="120dp"
+                app:srcCompat="@mipmap/rutinasp"
+                android:background="@android:color/transparent"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="288dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="15sp"
+                    android:text="Mis Rutinas"
+                    android:textColor="@color/colorVioletaD"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btn_nueva_rutina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="15sp"
+                    android:src="@mipmap/addx32"
+                    android:background="@android:color/transparent"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="15sp"
+                    android:src="@mipmap/edit"
+                    android:background="@android:color/transparent"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/no_hay_misrutinas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="12dp"
+                android:textStyle="italic"
+                android:textSize="16dp"
+                android:text="@string/no_hay_rutinas"
+                />
+
+            <ListView
+                android:nestedScrollingEnabled="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginVertical="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:id="@+id/list_misrutinas"
+                android:layout_width="fill_parent"
+                android:layout_height="140dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="12dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:scrollbarStyle="outsideOverlay"/>
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rutinas Familiares"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="15sp"
+                    android:textColor="@color/colorAmarilloB"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+            <TextView
+                android:id="@+id/no_hay_rutinasfamiliares"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="12dp"
+                android:textStyle="italic"
+                android:textSize="16dp"
+                android:text="@string/no_hay_rutinas"
+                />
+
+            <ListView
+                android:nestedScrollingEnabled="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/list_rutinas_familiares"
+                android:layout_width="fill_parent"
+                android:layout_height="140dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="12dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:scrollbarStyle="outsideOverlay"/>
+
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rutinas Profesionales"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="15sp"
+                    android:textColor="@color/colorRojo"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+            <TextView
+                android:id="@+id/no_hay_rutinasprofesionales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="12dp"
+                android:textStyle="italic"
+                android:textSize="16dp"
+                android:text="@string/no_hay_rutinas"
+                />
+
+            <ListView
+                android:nestedScrollingEnabled="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/list_rutinas_profesionales"
+                android:layout_width="fill_parent"
+                android:layout_height="140dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="12dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:scrollbarStyle="outsideOverlay"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

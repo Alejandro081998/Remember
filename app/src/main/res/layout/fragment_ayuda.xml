@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorCelesteC"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:layout_marginTop="10sp"
+        app:srcCompat="@mipmap/ayuda" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="50sp"
+        android:text="@string/mAyuda"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="20sp">
+
+                    <ImageButton
+                        android:id="@+id/imageButton16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/profileconfig" />
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        android:layout_width="318dp"
+                        android:layout_height="80dp"
+                        android:text="@string/mPerfil"
+                        android:textAlignment="center"
+                        android:textSize="30sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20sp">
+
+                    <ImageButton
+                        android:id="@+id/imageButton17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/gamesconfig" />
+
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="310dp"
+                        android:layout_height="80dp"
+                        android:text="@string/mEntre"
+                        android:textAlignment="center"
+                        android:textSize="28sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20sp">
+
+                    <ImageButton
+                        android:id="@+id/imageButton18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/routinesconfig" />
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="318dp"
+                        android:layout_height="80dp"
+                        android:text="@string/mRutinas"
+                        android:textAlignment="center"
+                        android:textSize="30sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/imageButton19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/traceconfig" />
+
+                    <TextView
+                        android:id="@+id/textView42"
+                        android:layout_width="318dp"
+                        android:layout_height="80dp"
+                        android:text="@string/mSeguimiento"
+                        android:textAlignment="center"
+                        android:textSize="30sp" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

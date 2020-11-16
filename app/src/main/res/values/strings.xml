@@ -1,0 +1,212 @@
+<resources>
+    <string name="app_name">Remember</string>
+
+    <string name="Registrarse">Registrarse</string>
+
+    <string name="MensajeBienvenida">Remember Me</string>
+    <string name="IniciarSesion">Iniciar Sesión</string>
+    <string name="RememberMe">Remember Me.!</string>
+    <string name="Ingresar">Ingresar</string>
+    <string name="Recuperar">¿Olvidaste tu contraseña?</string>
+
+    <!-- TODO: Strings de Recuperar Inicio-->
+    <string name="Enviar">Enviar</string>
+    <string name="Email">Email</string>
+    <string name="textoAclarativo">TextoAclarativo</string>
+    <string name="title_activity_principal">principal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="item_perfil">Perfil</string>
+    <string name="item_rutinas">Rutinas</string>
+    <string name="item_entretenimiento">Entretenimiento</string>
+    <string name="item_notificaciones">Notificaciones</string>
+    <string name="item_ayuda">Registrar telefono</string>
+    <string name="item_seguimiento">Seguimiento</string>
+
+
+    <string name="lista_negra">Lista negra</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+
+
+    <!-- TODO: Strings de Registrarse Inicio-->
+    <string name="SelectPerfil">Elegi tu Perfil</string>
+    <string name="Select">Usted Selecciono</string>
+    <string name="Paciente">Paciente</string>
+    <string name="Familiar">Familiar</string>
+    <string name="Profesional">Profesional</string>
+    <string name="Nombre">Nombres</string>
+    <string name="Apellido">Apellidos</string>
+    <string name="DNI">Numero de Documento</string>
+    <string name="FN">Fecha de Nacimiento</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Masculino">Masculino</string>
+    <string name="Femenino">Femenino</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="ConfirmarC">Confirmar Contraseña</string>
+    <string name="Matricula">Numero de Matricula</string>
+
+    <string name="Peso">Peso (kg)</string>
+    <string name="Altura">Altura (m)</string>
+    <string name="Factor">Factor sanguineo</string>
+    <string name="Cabecera">Medico de cabecera</string>
+
+    <string name="Actualizar">Actualizar datos</string>
+
+    <string name="Datos_ingreso_mas">Datos de ingreso +</string>
+    <string name="Datos_ingreso_menos">Datos de ingreso -</string>
+    <string name="Ficha_medica_mas">Ficha medica +</string>
+    <string name="Ficha_medica_menos">Ficha medica -</string>
+
+    <string name="Nombre_contacto">Nombre de contacto</string>
+    <string name="Nuumero_contacto">Telefono</string>
+    <string name="Nuevo_contacto">Nuevo contacto</string>
+    <string name="Editar_contacto">Contacto</string>
+    <string name="tel_recu">Telefono de recuperacion</string>
+    <string name="ingrese_tel_recupero">Ingrese su telefono registrado</string>
+    <string name="Eliminar_contacto">Eliminar</string>
+    <string name="Modificar_contacto">Modificar</string>
+
+    <string name="cancelar">Cancelar</string>
+    <string name="ver_contactos">Ver contactos</string>
+    <string name="agregar">Agregar</string>
+    <string name="llamar">Llamar</string>
+    <string name="guardar">Guardar</string>
+    <string name="buscar">Buscar</string>
+
+    <string name="imagenes">Imagenes</string>
+    <string name="contactos">Contactos</string>
+
+    <string name="no_hay_contactos">No tienes contactos aun</string>
+    <string name="no_hay_lista">No cuentas con usuarios bloqueados</string>
+    <string name="no_hay_vinculaciones">No tienes vinculaciones aun</string>
+    <string name="no_hay_usuarios">No hay usuarios para mostrar</string>
+    <string name="no_hay_vincu_pendientes">No tienes vinculaciones pendientes</string>
+    <string name="no_hay_notificaciones">No tienes notificaciones</string>
+    <string name="no_seguimiento">No tienes vinculaciones aun</string>
+    <string name="vinculaciones">Vinculaciones</string>
+
+    <string name="vinculacion">VINCULACION</string>
+    <string name="bloqueado">BLOQUEADO</string>
+
+    <string name="adicionar">+</string>
+    <string name="nombre_ape">Nombre y apellido</string>
+
+    <string name="familiares">Familiares</string>
+    <string name="medicos">Profesionales</string>
+
+    <string name="seleccionar">Seleccionar</string>
+
+
+    <string-array name="factores">
+        <item>Seleccionar</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>0+</item>
+        <item>0-</item>
+    </string-array>
+
+    <string-array name="vinculacion">
+        <item>Ver perfil</item>
+        <item>Vincularme</item>
+    </string-array>
+
+    <string-array name="lista_debloqueo">
+        <item>Ver perfil</item>
+        <item>Desbloquear</item>
+    </string-array>
+
+    <string-array name="solicitud_vinculacion">
+        <item>Ver perfil</item>
+        <item>Rechazar</item>
+        <item>Aceptar</item>
+    </string-array>
+
+    <string-array name="dialogo_rutina">
+        <item>Ignorar</item>
+        <item>Activar</item>
+        <item>Editar</item>
+    </string-array>
+
+    <string-array name="gestion_vinculacion">
+        <item>Ver perfil</item>
+        <item>Desvincularse</item>
+        <item>Administrar rutinas</item>
+    </string-array>
+
+    <string-array name="gestion_vinculacion_paciente">
+        <item>Ver perfil</item>
+        <item>Desvincularse</item>
+    </string-array>
+
+    <string-array name="gestion_foto">
+        <item>Eliminar foto</item>
+        <item>Cambiar foto</item>
+    </string-array>
+
+
+    <!-- TODO: Strings de fargment_perfil-->
+    <string name="Vinculaciones">Vinculaciones</string>
+    <string name="Contactos">Contactos</string>
+    <string name="Numero">Numero</string>
+    <!-- TODO: Strings de fargment_perfil Fin-->
+
+    <!-- TODO: Strings de ABM_Rutinas Inicio-->
+    <string name="Titulo">Titulo</string>
+    <string name="txTitulo">(Titulo)</string>
+    <string name="Horario">Horario</string>
+    <string name="Dias">Dias</string>
+    <string name="HH">HH</string>
+    <string name="MM">MM</string>
+    <string name="Lunes">Lunes</string>
+    <string name="Martes">Martes</string>
+    <string name="Miercoles">Miercoles</string>
+    <string name="Jueves">Jueves</string>
+    <string name="Viernes">Viernes</string>
+    <string name="Sabado">Sabado</string>
+    <string name="Domingo">Domingo</string>
+    <string name="Guardar">Guardar</string>
+    <string name="Cancelar">Cancelar</string>
+    <!-- TODO: Strings de ABM_Rutinas Fin-->
+
+    <!-- TODO: Strings de Nueva_Vinculacion Inicio-->
+    <string name="NVinculacion">Nueva Vinculacion</string>
+    <!-- TODO: Strings de Nueva_Vinculacion Fin-->
+
+    <!-- TODO: Strings de Entretenimiento-->
+    <string name="refra">REFRANERO</string>
+    <string name="eshora">ES HORA</string>
+    <string name="paren">PARENTESCOS</string>
+    <!-- TODO: Strings de Entretenimiento Fin-->
+
+
+    <string name="MisRutinas">Mis Rutinas</string>
+    <string name="OtrasRutinas">Otras Rutinas</string>
+
+    <!-- TODO: Strings de Ayuda-->
+    <string name="mAyuda">Informacion sobre Modulos</string>
+    <string name="mPerfil">Informacion sobre Modulo Perfil</string>
+    <string name="mRutinas">Informacion sobre Modulo Rutinas</string>
+    <string name="mSeguimiento">Informacion sobre Modulo Seguimiento</string>
+    <string name="mEntre">Informacion sobre Modulo Entretenimiento</string>
+    <!-- TODO: Strings de Ayuda FIN-->
+
+    <string name="Imagenes">Imagenes</string>
+
+    <string name="tipo_rut">Tipo de rutina</string>
+
+    <string name="no_hay_rutinas">No tienes rutinas aun</string>
+
+    <string name="Eliminar">Eliminar</string>
+
+
+</resources>

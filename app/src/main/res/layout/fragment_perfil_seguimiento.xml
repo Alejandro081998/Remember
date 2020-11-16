@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_detalle_item"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:background="@color/colorCelesteC"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tvNombre"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tvIdUsu"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titulo" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="match_parent"
+        android:textStyle="italic"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:layout_height="wrap_content" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgFotoDet_seguimiento"
+        android:layout_gravity="center"
+        android:layout_alignParentTop = "true"
+        android:layout_centerHorizontal = "true"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        />
+
+
+
+    <ListView
+        android:nestedScrollingEnabled="true"
+        android:layout_gravity="center"
+        android:id="@+id/lvlogs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:dividerHeight="1dp"
+        android:layout_marginTop="15dp"
+        android:scrollbarStyle="outsideOverlay"/>
+
+</LinearLayout>

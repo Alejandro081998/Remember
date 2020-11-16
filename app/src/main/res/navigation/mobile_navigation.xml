@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_perfil">
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.frgp.remember.ui.Perfil.Raiz.PerfilFragment"
+        android:label="@string/item_perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_notificaciones"
+        android:name="com.frgp.remember.ui.Notificaciones.Raiz.NotificacionesFragment"
+        android:label="@string/item_notificaciones"
+        tools:layout="@layout/fragment_notificaciones" />
+
+    <fragment
+        android:id="@+id/nav_rutinas"
+        android:name="com.frgp.remember.ui.Rutinas.Raiz.RutinasFragment"
+        android:label="@string/item_rutinas"
+        tools:layout="@layout/fragment_rutinas" />
+
+    <fragment
+        android:id="@+id/nav_ayuda"
+        android:name="com.frgp.remember.ui.Ayuda.AyudaFragment"
+        android:label="@string/item_ayuda"
+        tools:layout="@layout/fragment_ayuda" />
+
+    <fragment
+        android:id="@+id/nav_seguimiento"
+        android:name="com.frgp.remember.ui.Seguimiento.Raiz.SeguimientoFragment"
+        android:label="@string/item_seguimiento"
+        tools:layout="@layout/fragment_seguimiento" />
+
+</navigation>

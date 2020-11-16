@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@drawable/marco_violeta"
+    android:id="@+id/marco_paciente"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/txt_titulo"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="3dp"
+        android:textSize="18dp"
+        android:textStyle="italic|bold" />
+
+    <TextView
+        android:id="@+id/txt_hora"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:textSize="15dp"
+        android:textStyle="italic|normal" />
+
+
+
+    <TextView
+        android:id="@+id/txt_id_rutina"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txt_idusuario_creador"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txt_tipo_rutina"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txt_idusuario_paciente"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txt_nombrecreador"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txt_apellidocreador"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:textStyle="italic" />
+
+
+
+</LinearLayout>

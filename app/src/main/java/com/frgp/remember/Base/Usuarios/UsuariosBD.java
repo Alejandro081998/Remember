@@ -73,14 +73,14 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
     private boolean no_hay_usuarios;
     private ListView listUsuarios;
     private SearchView buscar;
-    private TextView no_hay;
+    private TextView no_hay,peso,altura,factor;
     private boolean familiar;
     private boolean medico,te_bloqueo;
     private CheckBox chkf;
     private CheckBox chkm;
     private ListView lista_seguimiento;
     private Bitmap image;
-
+    private Pacientes pacientes;
     private TextView perfil_nombre, perfil_usuario, perfil_rol, perfil_desde;
     private ImageView perfil_imagen;
     private Switch perfil_switch_vinculacion, perfil_switch_bloqueado;
@@ -121,9 +121,13 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
         dialog = new ProgressDialog(ct);
     }
 
-    public UsuariosBD(ImageView img,Usuarios us, Context ct, String que) {
-
+    public UsuariosBD(ImageView img,Usuarios us, Context ct, TextView peso,
+                      TextView altura, TextView factor, String que) {
+        this.pacientes = new Pacientes();
         this.imgseguimiento = img;
+        this.peso = peso;
+        this.altura = altura;
+        this.factor = factor;
         user = new Usuarios();
         this.user = us;
         this.context = ct;
@@ -632,11 +636,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                 Statement st = con.createStatement();
                 ResultSet rs = null;
 
-
-
-
-
-                String add = "http://conscientious-calcu.000webhostapp.com/getImage.php?id="+user.getId_usuario();
+                String add = "http://femina.webcindario.com/getImageR.php?id="+user.getId_usuario();
                 URL url = null;
                 //Bitmap image = null;
                 try {
@@ -654,6 +654,14 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
 
                     if(rs.getBlob(1)==null)
                         image = BitmapFactory.decodeResource(context.getResources(), R.mipmap.nodisponible);
+                }
+
+                rs = st.executeQuery("SELECT * from pacientes where idusuario =" + user.getId_usuario());
+
+                if (rs.next()) {
+                    pacientes.setPeso(rs.getFloat("peso"));
+                    pacientes.setAltura(rs.getFloat("altura"));
+                    pacientes.setFactorS(rs.getString("factors"));
                 }
 
 
@@ -838,7 +846,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                     user.setImagen(rs.getBlob("image"));
 
 
-                    String add = "http://conscientious-calcu.000webhostapp.com/getImage.php?id="+rs.getInt("idusuario");
+                    String add = "http://femina.webcindario.com/getImageR.php?id="+rs.getInt("idusuario");
                     URL url = null;
                     //Bitmap image = null;
                     try {
@@ -1013,6 +1021,12 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
         if(que_hacer.equals("ObtenerFotoDetSeguimiento"))
         {
             imgseguimiento.setImageBitmap(image);
+
+            if(peso!=null) {
+                peso.setText("PESO: " + pacientes.getPeso() + " Kg");
+                altura.setText("ALTURA: " + pacientes.getAltura() + " m");
+                factor.setText("FACTOR SANGUINEO: " + pacientes.getFactorS());
+            }
 
         }
 

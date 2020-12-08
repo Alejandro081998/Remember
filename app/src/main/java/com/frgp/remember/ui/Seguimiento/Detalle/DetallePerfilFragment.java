@@ -20,11 +20,13 @@ import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.Principal.MainActivity;
 import com.frgp.remember.R;
 
+import org.w3c.dom.Text;
+
 
 public class DetallePerfilFragment extends Fragment {
 
     private DetallePerfilViewModel detallePerfilViewModel;
-    private TextView idusuario,nombreusu,apellidousu,ususeg;
+    private TextView idusuario,nombreusu,apellidousu,ususeg,peso,altura,factor;
     private ImageView imgusudet;
     private ListView listalogs;
 
@@ -46,6 +48,10 @@ public class DetallePerfilFragment extends Fragment {
         ususeg = (TextView) root.findViewById(R.id.tvUsuario);
         listalogs = (ListView)  root.findViewById(R.id.lvlogs);
 
+        peso = (TextView) root.findViewById(R.id.txt_peso);
+        altura = (TextView) root.findViewById(R.id.txt_altura);
+        factor = (TextView) root.findViewById(R.id.txt_factor);
+
         final Bundle datosRecuperados = getArguments();
 
         if (datosRecuperados != null) {
@@ -58,7 +64,8 @@ public class DetallePerfilFragment extends Fragment {
                     datosRecuperados.getString("ApellidoSeguimiento" ));
             ususeg.setText(datosRecuperados.getString("usuSeguimiento"));
 
-            UsuariosBD usuimg = new UsuariosBD(imgusudet,usu,getContext(),"ObtenerFotoDetSeguimiento");
+            UsuariosBD usuimg = new UsuariosBD(imgusudet,usu,getContext(),
+                    peso,altura,factor,"ObtenerFotoDetSeguimiento");
 
 
             UsuariosBD userlog = new UsuariosBD(getContext(),"Listar_logs",listalogs,usu);

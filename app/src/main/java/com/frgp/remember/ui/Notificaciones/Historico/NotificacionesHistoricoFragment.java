@@ -1,4 +1,4 @@
-package com.frgp.remember.ui.Notificaciones.Raiz;
+package com.frgp.remember.ui.Notificaciones.Historico;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,74 +11,57 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.frgp.remember.Base.ListaNegra.ListaNegraBD;
 import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
+import com.frgp.remember.Dialogos.DialogoDesbloqueo;
+import com.frgp.remember.Entidades.ListaNegra;
 import com.frgp.remember.Entidades.Notificaciones;
+import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.Principal.MainActivity;
 import com.frgp.remember.R;
 import com.frgp.remember.Session.Session;
-import com.frgp.remember.ui.Notificaciones.Actividades.Calendario.CalendarioFragment;
-import com.frgp.remember.ui.Notificaciones.Actividades.Hora.HoraFragment;
-import com.frgp.remember.ui.Notificaciones.Actividades.Parentesco.ParentescoFragment;
-import com.frgp.remember.ui.Notificaciones.Actividades.Refranero.RefraneroFragment;
-import com.frgp.remember.ui.Notificaciones.Historico.NotificacionesHistoricoFragment;
+import com.frgp.remember.ui.ListaNegra.ListaNegraViewModel;
 import com.frgp.remember.ui.Rutinas.Raiz.RutinasFragment;
 import com.frgp.remember.ui.Vinculaciones.Listado.ListadoVinculacionesFragment;
 import com.frgp.remember.ui.Vinculaciones.ListadoProfesional.VinculacionesProfesionalFragment;
 import com.frgp.remember.ui.Vinculaciones.Pendientes.VinculacionesPendientesFragment;
 
-import java.util.List;
+public class NotificacionesHistoricoFragment extends Fragment {
 
-public class NotificacionesFragment extends Fragment {
-
-    private NotificacionesViewModel notificacionesViewModel;
-
+    private NotificacionesHistoricoViewModel notificacionesHistoricoViewModel;
     private ListView list_notificaciones;
-    private TextView no_hay_notificaciones;
     private SearchView buscar_notificacion;
+    private TextView no_hay_notificaciones;
     private Session ses;
-    private Button btn_historico;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificacionesViewModel =
-                ViewModelProviders.of(this).get(NotificacionesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notificaciones, container, false);
+        notificacionesHistoricoViewModel =
+                ViewModelProviders.of(this).get(NotificacionesHistoricoViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_historico_notificaciones, container, false);
         ((MainActivity) getActivity()).hideFlotanteContacto();
         ((MainActivity) getActivity()).hideMenu();
         ((MainActivity) getActivity()) .hideVinculaciones();
 
+        list_notificaciones = (ListView) root.findViewById(R.id.list_notificaciones_historico);
+        buscar_notificacion = (SearchView) root.findViewById(R.id.buscar_notificacion_historico);
+        no_hay_notificaciones = (TextView) root.findViewById(R.id.no_hay_notificaciones_historicas_historico);
 
-        list_notificaciones = (ListView) root.findViewById(R.id.list_notificaciones);
-        no_hay_notificaciones = (TextView) root.findViewById(R.id.no_hay_notificaciones);
-        buscar_notificacion = (SearchView) root.findViewById(R.id.buscar_notificacion);
-        btn_historico = (Button) root.findViewById(R.id.btn_historico);
+        NotificacionesBD not = new NotificacionesBD(getContext(),"CargarNotificacionesHistoricas"
+                ,no_hay_notificaciones,list_notificaciones,buscar_notificacion);
+        not.execute();
 
         ses = new Session();
         ses.setCt(getContext());
         ses.cargar_session();
-
-
-
-        NotificacionesBD not = new NotificacionesBD(getContext(),"CargarNotificaciones",no_hay_notificaciones,list_notificaciones,buscar_notificacion   );
-        not.execute();
-
-
-        btn_historico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_main, new NotificacionesHistoricoFragment()).commit();
-
-            }
-        });
 
         list_notificaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -129,15 +112,8 @@ public class NotificacionesFragment extends Fragment {
             }
         });
 
-        //((MainActivity) getActivity()).hideFlotanteRedireccionContacto();
-        //final TextView textView = root.findViewById(R.id.text_send);
-        notificacionesViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
-            }
-        });
 
         return root;
     }
+
 }

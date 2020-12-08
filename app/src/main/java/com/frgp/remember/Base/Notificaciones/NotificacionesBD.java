@@ -23,6 +23,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.frgp.remember.Adaptadores.AdaptadorNotificaciones;
+import com.frgp.remember.Adaptadores.AdaptadorNotificacionesHistoricas;
 import com.frgp.remember.Base.Data.DatosBD;
 import com.frgp.remember.Entidades.Apartados;
 import com.frgp.remember.Entidades.Estados;
@@ -261,6 +262,69 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
         }
 
+        if (que_hacer.equals("CargarNotificacionesHistoricas")) {
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(DatosBD.urlMySQL, DatosBD.user, DatosBD.pass);
+                //ps = con.prepareStatement("INSERT INTO usuarios(id, nombre,stock,alertastock,idCategoria) VALUES(?,?,?,?,?)");
+
+                ResultSet rs;
+                Statement st = con.createStatement();
+                ResultSet rs_;
+                Statement st_ = con.createStatement();
+
+                rs = st.executeQuery("SELECT * FROM notificaciones where idDestinatario=" + ses.getId_usuario()
+                        + " and Estado=10");
+
+                listaNotificaciones.clear();
+
+                while (rs.next()) {
+
+                    not = new Notificaciones();
+                    apart = new Apartados();
+                    estado1 = new Estados();
+                    estado2 = new Estados();
+                    usu = new Usuarios();
+                    usu1 = new Usuarios();
+
+                    rs_ = st_.executeQuery("SELECT Descripcion from apartados where idApartado=" + rs.getInt("idApartado"));
+
+                    if (rs_.next())
+                        apart.setDescripcion(rs_.getString("Descripcion"));
+
+                    Log.d("APARTADO:", "" + apart.getDescripcion());
+
+                    not.setIdNotificacion(rs.getInt("idNotificacion"));
+                    usu.setId_usuario(rs.getInt("idRemitente"));
+                    not.setIdRemitente(usu);
+                    usu1.setId_usuario(rs.getInt("idDestinatario"));
+                    not.setIdDestinatario(usu1);
+                    not.setHora(rs.getTimestamp("Hora"));
+                    not.setDescripcion(rs.getString("Descripcion"));
+                    apart.setIdApartado(rs.getInt("idApartado"));
+                    not.setIdApartado(apart);
+                    estado1.setId_estado(rs.getInt("Estado"));
+                    not.setEstado(estado1);
+                    estado2.setId_estado(rs.getInt("Envio"));
+                    not.setEnvio(estado2);
+
+
+                    listaNotificaciones.add(not);
+                    no_hay_notificaciones = false;
+                }
+
+                response = "Conexion exitosa";
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                //result2 = "Conexion no exitosa";
+                mensaje_devuelto = "Error al buscar notificaciones!";
+            }
+
+
+        }
+
         if (que_hacer.equals("Leida") || que_hacer.equals("Recibida")) {
 
             try {
@@ -389,7 +453,7 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        if(que_hacer.equals("CargarNotificaciones")) {
+        if(que_hacer.equals("CargarNotificaciones") || que_hacer.equals("CargarNotificacionesHistoricas")) {
             dialog.setMessage("Procesando...");
             dialog.show();
         }
@@ -405,6 +469,41 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
             }
 
             final AdaptadorNotificaciones adapter = new AdaptadorNotificaciones(context,listaNotificaciones);
+            list_notificaciones.setAdapter(adapter);
+
+
+            buscar_notificaciones.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    adapter.getFilter().filter(s);
+                    return true;
+                }
+            });
+
+
+
+            if (no_hay_notificaciones) {
+                txt_no_hay_notificaciones.setVisibility(View.VISIBLE);
+                list_notificaciones.setVisibility(View.GONE);
+            } else {
+                txt_no_hay_notificaciones.setVisibility(View.GONE);
+                list_notificaciones.setVisibility(View.VISIBLE);
+            }
+
+        }
+
+        if(que_hacer.equals("CargarNotificacionesHistoricas")) {
+
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+
+            final AdaptadorNotificacionesHistoricas adapter = new AdaptadorNotificacionesHistoricas(context,listaNotificaciones);
             list_notificaciones.setAdapter(adapter);
 
 

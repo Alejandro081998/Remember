@@ -20,6 +20,7 @@ import com.frgp.remember.ui.Notificaciones.Actividades.Calendario.CalendarioFrag
 import com.frgp.remember.ui.Notificaciones.Actividades.Hora.HoraFragment;
 import com.frgp.remember.ui.Notificaciones.Actividades.Parentesco.ParentescoFragment;
 import com.frgp.remember.ui.Notificaciones.Actividades.Refranero.RefraneroFragment;
+import com.frgp.remember.ui.Notificaciones.Historico.NotificacionesHistoricoFragment;
 import com.frgp.remember.ui.Notificaciones.Raiz.NotificacionesFragment;
 import com.frgp.remember.ui.ListadoContactos.ListadoContactosFragment;
 import com.frgp.remember.ui.Perfil.PerfilDetalle.PerfilDetalleFragment;
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Usuarios user = new Usuarios();
         user.setId_usuario(ses.getId_usuario());
 
-        UsuariosBD us = new UsuariosBD(img,user,this,"ObtenerFotoDetSeguimiento");
+        UsuariosBD us = new UsuariosBD(img,user,this,null,null,null,"ObtenerFotoDetSeguimiento");
         us.execute();
 
 
@@ -380,6 +381,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(currentFragment instanceof RutinasFragment){
             if(!ses.getTipo_rol().equals("Paciente"))
                 fragmentManager.beginTransaction().replace(R.id.content_main, new VinculacionesProfesionalFragment()).commit();
+        }
+        else if(currentFragment instanceof NotificacionesHistoricoFragment){
+            fragmentManager.beginTransaction().replace(R.id.content_main, new NotificacionesFragment()).commit();
         }
         else{
             Toast.makeText(this, "Para salir cierra la sesion desde el menu!", Toast.LENGTH_SHORT).show();

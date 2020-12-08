@@ -254,7 +254,7 @@ public class PerfilBD extends AsyncTask<String, Void, String> {
                     }
 
                     //String id = urls[0];
-                    String add = "http://conscientious-calcu.000webhostapp.com/getImage.php?id="+ses.getId_usuario();
+                    String add = "http://femina.webcindario.com//getImageR.php?id="+ses.getId_usuario();
                     URL url = null;
                     //Bitmap image = null;
                     try {

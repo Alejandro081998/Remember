@@ -210,7 +210,8 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
                 ResultSet rs_;
                 Statement st_ = con.createStatement();
 
-                rs = st.executeQuery("SELECT * FROM notificaciones where idDestinatario=" + ses.getId_usuario());
+                rs = st.executeQuery("SELECT * FROM notificaciones where idDestinatario=" + ses.getId_usuario()
+                + " and Estado=2");
 
                 listaNotificaciones.clear();
 

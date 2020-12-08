@@ -17,7 +17,13 @@
         android:layout_marginLeft="9dp"
         />
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="HISTORICO"
+        />
 
     <ListView
         android:nestedScrollingEnabled="true"
@@ -42,6 +48,8 @@
         android:textSize="16dp"
         android:text="@string/no_hay_notificaciones"
         />
+
+
 
 
 

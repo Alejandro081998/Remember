@@ -63,7 +63,7 @@ public class ViewImage extends AppCompatActivity implements View.OnClickListener
             @Override
             protected Bitmap doInBackground(String... params) {
                 String id = params[0];
-                String add = "http://conscientious-calcu.000webhostapp.com/getImage.php?id="+id;
+                String add = "http://femina.webcindario.com/getImageR.php?id="+id;
                 URL url = null;
                 Bitmap image = null;
                 try {

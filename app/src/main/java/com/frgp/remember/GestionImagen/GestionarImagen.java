@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 public class GestionarImagen extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String UPLOAD_URL = "http://conscientious-calcu.000webhostapp.com/upload.php";
+    public static final String UPLOAD_URL = "http://femina.webcindario.com/uploadR.php";
     public static final String UPLOAD_KEY = "image";
     public static String ID_USUARIO = "";
     public static final String TAG = "MY MESSAGE";

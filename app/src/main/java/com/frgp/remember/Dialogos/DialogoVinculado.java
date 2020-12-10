@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CpuUsageInfo;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +24,8 @@ public class DialogoVinculado extends AppCompatDialogFragment {
     private Usuarios usu;
 
     public DialogoVinculado(Usuarios u){
-
+        this.usu = new Usuarios();
         this.usu = u;
-
     }
 
     @Override

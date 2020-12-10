@@ -24,6 +24,7 @@ import com.frgp.remember.Adaptadores.AdaptadorNuevaVinculacion;
 import com.frgp.remember.Adaptadores.AdaptadorSeguimiento;
 import com.frgp.remember.Base.Data.DatosBD;
 import com.frgp.remember.Base.LogsUsuariosBD.LogsBD;
+import com.frgp.remember.Dialogos.DialogoDesbloqueo;
 import com.frgp.remember.Entidades.Estados;
 import com.frgp.remember.Entidades.Familiares;
 import com.frgp.remember.Entidades.LogsUsuarios;
@@ -55,6 +56,7 @@ import java.util.ArrayList;
 public class UsuariosBD extends AsyncTask<String, Void, String> {
 
 
+    private static final String TAG = "Usuario" ;
     private Usuarios user;
     private TipoRol tipo;
     private Estados esta;
@@ -688,7 +690,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                 Statement st_ = con.createStatement();
                 ResultSet rs_ = null;
 
-                rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + user.getId_usuario() + " and idUserBloqueado=" +
+                rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + user.getId_usuario() + " and idUserBloqueado=" +
                         ses.getId_usuario());
 
                 if(rs.next()){
@@ -697,6 +699,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
 
                 }
 
+                Log.d(TAG, "Usuario que llega: " + user.getId_usuario());
 
                 rs = st.executeQuery("SELECT * from usuarios where idusuario=" + user.getId_usuario());
 
@@ -732,7 +735,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                         perfil_vinculado = true;
                     }
 
-                    rs_ = st_.executeQuery("SELECT * from listaNegra where idusuario=" +
+                    rs_ = st_.executeQuery("SELECT * from listanegra where idusuario=" +
                             ses.getId_usuario() + " and idUserBloqueado=" + user.getId_usuario());
 
                     if(rs_.next())
@@ -745,7 +748,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                     user.setFecha_alta(rs.getDate("fecha_alta"));
 
 
-                    String add = "http://conscientious-calcu.000webhostapp.com/getImage.php?id="+rs.getInt("idusuario");
+                    String add = "http://femina.webcindario.com/getImageR.php?id="+rs.getInt("idusuario");
                     URL url = null;
                     //Bitmap image = null;
                     try {

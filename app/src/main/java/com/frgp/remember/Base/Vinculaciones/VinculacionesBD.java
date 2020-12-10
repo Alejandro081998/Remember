@@ -231,7 +231,7 @@ public class VinculacionesBD extends AsyncTask<String, Void, String> {
                     insertamos = false;
                 }
 
-                rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
+                rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
                         usu.getId_usuario());
 
                 if(rs.next()){
@@ -241,7 +241,7 @@ public class VinculacionesBD extends AsyncTask<String, Void, String> {
                 }
                 else{
 
-                    rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + usu.getId_usuario() + " and idUserBloqueado=" +
+                    rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + usu.getId_usuario() + " and idUserBloqueado=" +
                             ses.getId_usuario());
 
                     if(rs.next()){

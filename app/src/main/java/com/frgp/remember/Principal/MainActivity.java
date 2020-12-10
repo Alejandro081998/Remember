@@ -13,6 +13,7 @@ import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.R;
 import com.frgp.remember.IniciarSesion.iniciar_sesion;
 import com.frgp.remember.Servicio.SegundoPlano;
+import com.frgp.remember.ServicioNotificaciones.Alarm;
 import com.frgp.remember.Session.Session;
 import com.frgp.remember.ui.Ayuda.AyudaFragment;
 import com.frgp.remember.ui.ListaNegra.ListaNegraFragment;
@@ -112,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Session ses = new Session();
         ses.setCt(this);
         ses.cargar_session();
+
+        Alarm alarm = new Alarm();
+        alarm.setAlarm(this);
 
         txt_nombre.setText("Hola " + ses.getUsuario());
 

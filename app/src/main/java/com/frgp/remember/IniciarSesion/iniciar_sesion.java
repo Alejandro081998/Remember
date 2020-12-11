@@ -80,8 +80,8 @@ public class iniciar_sesion extends AppCompatActivity {
             Log.d("USUARIOLOGUEADO:", ses.getUsuario());
             Log.d("CONTRASEÑALOGUEADO:" , ses.getContrasena());
 
-            UsuariosBD userbd = new UsuariosBD(user, this, "Loguin", "", "", "");
-            userbd.execute();
+            //UsuariosBD userbd = new UsuariosBD(user, this, "Loguin", "", "", "");
+            //userbd.execute();
 
         }
 

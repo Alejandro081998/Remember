@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
 import com.frgp.remember.R;
 
 import static android.provider.Settings.System.getString;
@@ -32,22 +33,8 @@ public class Alarm extends BroadcastReceiver
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
 
-        // Put here YOUR code.
-        Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show(); // For example
-
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle("Alerta SOS activada")
-                .setContentText("Toca para cancelar")
-                .setSmallIcon(R.drawable.side_nav_bar)
-                //.setContentIntent(pendingIntent)
-                .build();
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(123, notification);
-
-
+        NotificacionesBD nt = new NotificacionesBD(context,"VerificarNotificaciones");
+        nt.execute();
 
         Log.d("ALARMA", "PASA: ");
 

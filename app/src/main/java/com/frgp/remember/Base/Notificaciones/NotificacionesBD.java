@@ -408,6 +408,7 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
                     not = new Notificaciones();
                     not.setDescripcion(rs.getString("Descripcion"));
                     not.setIdNotificacion(rs.getInt("idNotificacion"));
+                    not.setHora(rs.getTimestamp("Hora"));
 
                     listaNotificaciones.add(not);
 
@@ -528,18 +529,12 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
         if(que_hacer.equals("VerificarNotificaciones")){
 
-
             for(Notificaciones not: listaNotificaciones){
 
                 CreateNotificationChannel();
                 CreateNotification(not.getDescripcion(),not.getIdNotificacion());
 
             }
-
-            NotificacionesBD nt = new NotificacionesBD(context,"VerificarNotificaciones");
-            nt.execute();
-
-
         }
 
 

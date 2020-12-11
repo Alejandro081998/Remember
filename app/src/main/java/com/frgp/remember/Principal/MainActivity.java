@@ -295,6 +295,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_cerrar) {
             ses.setCt(this);
             ses.cerrar_session();
+            Alarm alarm = new Alarm();
+            alarm.cancelAlarm(this);
             Intent intent = new Intent(this, iniciar_sesion.class);
             startActivity(intent);
         } else if (id == R.id.nav_seguimiento) {

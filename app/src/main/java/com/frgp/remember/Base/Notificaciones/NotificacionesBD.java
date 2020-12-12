@@ -7,8 +7,11 @@ package com.frgp.remember.Base.Notificaciones;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,17 +21,19 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.frgp.remember.Adaptadores.AdaptadorNotificaciones;
 import com.frgp.remember.Adaptadores.AdaptadorNotificacionesHistoricas;
 import com.frgp.remember.Base.Data.DatosBD;
+import com.frgp.remember.Direccionamiento.DireccionamientoNotificaciones;
 import com.frgp.remember.Entidades.Apartados;
 import com.frgp.remember.Entidades.Estados;
 import com.frgp.remember.Entidades.Notificaciones;
 import com.frgp.remember.Entidades.Usuarios;
+import com.frgp.remember.Principal.MainActivity;
 import com.frgp.remember.R;
 import com.frgp.remember.Session.Session;
 
@@ -44,12 +49,13 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
 
+    //private static final String TAG = "LOG";
     private Usuarios usu;
     private Usuarios usu1;
     private Notificaciones not;
     private Apartados apart;
     private Estados estado1,estado2;
-
+    private PendingIntent pendingIntent;
 
 
     private String que_hacer;
@@ -108,6 +114,7 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
         this.context = ct;
         estado1 = new Estados();
         this.que_hacer = que;
+        this.apart = new Apartados();
     }
 
     public NotificacionesBD(Context ct, String que){
@@ -397,8 +404,14 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
                 if (rs.next())
                     estado1.setId_estado(rs.getInt("idestado"));
 
-                rs = st.executeQuery("SELECT * FROM notificaciones where Envio=" + estado1.getId_estado() + " and" +
-                        " idDestinatario=" + ses.getId_usuario());
+//                rs = st.executeQuery("SELECT * FROM notificaciones where Envio=" + estado1.getId_estado() + " and" +
+//                        " idDestinatario=" + ses.getId_usuario());
+
+                rs = st.executeQuery("SELECT n.Descripcion,n.idNotificacion,n.Hora,a.Descripcion FROM " +
+                        "notificaciones n inner join apartados a on n.idApartado = a.idApartado" +
+                        " where n.Envio=" + estado1.getId_estado() + " and" +
+                        " n.idDestinatario=" + ses.getId_usuario());
+
 
                 listaNotificaciones.clear();
 
@@ -406,9 +419,13 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
                     Log.d("HAYNOTI:" ,"SI HAY");
                     not = new Notificaciones();
-                    not.setDescripcion(rs.getString("Descripcion"));
-                    not.setIdNotificacion(rs.getInt("idNotificacion"));
-                    not.setHora(rs.getTimestamp("Hora"));
+                    apart = new Apartados();
+                    not.setDescripcion(rs.getString(1));
+                    not.setIdNotificacion(rs.getInt(2));
+                    not.setHora(rs.getTimestamp(3));
+                    Log.d("DESCRIP", "Descripcion: " + rs.getString(4));
+                    apart.setDescripcion(rs.getString(4));
+                    not.setIdApartado(apart);
 
                     listaNotificaciones.add(not);
 
@@ -454,6 +471,7 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onPostExecute(String response) {
 
@@ -530,13 +548,26 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
         if(que_hacer.equals("VerificarNotificaciones")){
 
             for(Notificaciones not: listaNotificaciones){
-
+                setPendingIntent(not.getIdNotificacion(),not.getIdApartado().getDescripcion());
                 CreateNotificationChannel();
                 CreateNotification(not.getDescripcion(),not.getIdNotificacion());
 
             }
         }
 
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void setPendingIntent(int notif, String apartado) {
+
+        Intent notificationIntent = new Intent(context, DireccionamientoNotificaciones.class);
+        notificationIntent.putExtra("apartado",apartado);
+        notificationIntent.putExtra("noti",notif);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(DireccionamientoNotificaciones.class);
+        stackBuilder.addNextIntent(notificationIntent);
+        pendingIntent = stackBuilder.getPendingIntent(notif,PendingIntent.FLAG_CANCEL_CURRENT);
 
     }
 
@@ -556,19 +587,24 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
 
     private void CreateNotification(String desc, int notif){
 
+
+
+        //notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //notificationIntent.putExtra("apartado",not.getIdApartado().getDescripcion());
+
+
         String CHANNEL_ID = "NOTIFICACION";
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID);
-        builder.setSmallIcon(R.drawable.ic_alerta);
-        builder.setContentTitle("Rememberme");
+        builder.setSmallIcon(R.drawable.ic_remember);
+        builder.setContentTitle("RememberMe");
         builder.setContentText(desc);
         builder.setColor(Color.BLUE);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA,1000,1000);
         builder.setVibrate(new long[]{1000,1000,1000,1000,1000,1000});
         builder.setDefaults(Notification.DEFAULT_SOUND);
-
-        //builder.setContentIntent(pendingIntent);
+        builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(notif,builder.build());

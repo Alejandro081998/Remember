@@ -3,6 +3,7 @@ package com.frgp.remember.Principal;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
 import com.frgp.remember.Base.Usuarios.UsuariosBD;
 import com.frgp.remember.Dialogos.DialogoRecuperaciones;
 import com.frgp.remember.Dialogos.EditarContacto;
@@ -63,11 +64,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String APARTADO = "";
     private AppBarConfiguration mAppBarConfiguration;
     private NavigationView nav_seguimiento;
     private TextView txt_nombre;
@@ -80,6 +83,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Session ses = new Session();
+        ses.setCt(this);
+        ses.cargar_session();
+
+        if(ses.getUsuario().equals("")){
+            Intent intent = new Intent(this,iniciar_sesion.class);
+            startActivity(intent);
+        }
+
         //toolbar.setSubtitle(R.string.vista_parqueos);
         //setTitle(R.string.app_name);
 
@@ -98,7 +111,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        Fragment fragment = new PerfilFragment();
+        Bundle parametros = this.getIntent().getExtras();
+        if (parametros != null) {
+            APARTADO = getIntent().getExtras().getString("apartado");
+        }
+
+
+        Fragment fragment;
+
+        switch (APARTADO){
+
+            case "Vinculaciones Pendientes":
+                 fragment = new VinculacionesPendientesFragment();
+                break;
+
+            case "ListadoVinculaciones":
+                fragment = new ListadoVinculacionesFragment();
+                break;
+
+            case "ListadoProfesional":
+                fragment = new VinculacionesProfesionalFragment();
+                break;
+
+            case "Rutinas":
+                fragment = new RutinasFragment();
+                break;
+
+            case "":
+                fragment = new PerfilFragment();
+                break;
+
+            default:
+                 fragment = new PerfilFragment();
+                break;
+
+        }
+
+
 
         getSupportFragmentManager().beginTransaction().add(R.id.content_main, fragment).commit();
 
@@ -110,12 +159,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.bringToFront();
         navigationView.setItemIconTintList(null);
 
-        Session ses = new Session();
-        ses.setCt(this);
-        ses.cargar_session();
-
         Alarm alarm = new Alarm();
         alarm.setAlarm(this);
+
+        NotificacionesBD nt = new NotificacionesBD(this,"VerificarNotificaciones");
+        nt.execute();
 
         txt_nombre.setText("Hola " + ses.getUsuario());
 

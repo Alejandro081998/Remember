@@ -110,12 +110,12 @@ public class ListaNegraBD extends AsyncTask<String, Void, String> {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(DatosBD.urlMySQL, DatosBD.user, DatosBD.pass);
 
-                ps = con.prepareStatement("INSERT INTO listaNegra (idUsuario, idUserBloqueado) VALUES (?,?)");
+                ps = con.prepareStatement("INSERT INTO listanegra (idUsuario, idUserBloqueado) VALUES (?,?)");
 
                 Statement st = con.createStatement();
                 ResultSet rs;
 
-                rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
+                rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
                          user.getId_usuario());
 
                 if(rs.next()){
@@ -258,13 +258,13 @@ public class ListaNegraBD extends AsyncTask<String, Void, String> {
 
                 if(que_hacer.equals("Desbloquear")) {
 
-                    ps = con.prepareStatement("Delete from listaNegra where idBloqueo=?");
+                    ps = con.prepareStatement("Delete from listanegra where idBloqueo=?");
 
                     ps.setInt(1, list.getId_bloqueo());
 
                 }else{
 
-                    ps = con.prepareStatement("Delete from listaNegra where idUsuario=? and idUserBloqueado=?");
+                    ps = con.prepareStatement("Delete from listanegra where idUsuario=? and idUserBloqueado=?");
 
                     ps.setInt(1, ses.getId_usuario());
                     ps.setInt(2,user.getId_usuario());
@@ -274,7 +274,7 @@ public class ListaNegraBD extends AsyncTask<String, Void, String> {
                 Statement st = con.createStatement();
                 ResultSet rs;
 
-                rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
+                rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + ses.getId_usuario() + " and idUserBloqueado=" +
                         user.getId_usuario());
 
                 if(!rs.next()){
@@ -332,7 +332,7 @@ public class ListaNegraBD extends AsyncTask<String, Void, String> {
                 Statement st_ = con.createStatement();
                 ResultSet rs_;
 
-                rs = st.executeQuery("SELECT * FROM  listaNegra where idUsuario=" + ses.getId_usuario());
+                rs = st.executeQuery("SELECT * FROM  listanegra where idUsuario=" + ses.getId_usuario());
 
 
                 while(rs.next()){

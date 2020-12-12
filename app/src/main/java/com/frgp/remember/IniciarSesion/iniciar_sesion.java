@@ -23,6 +23,7 @@ import com.frgp.remember.Dialogos.DialogoRecuperaciones;
 import com.frgp.remember.Dialogos.DialogoRecuperoMensaje;
 import com.frgp.remember.Entidades.Notificaciones;
 import com.frgp.remember.Entidades.Usuarios;
+import com.frgp.remember.Principal.MainActivity;
 import com.frgp.remember.Registrarse.registrarse;
 import com.frgp.remember.RecuperarAcceso.recuperar_acceso;
 import com.frgp.remember.R;
@@ -82,6 +83,10 @@ public class iniciar_sesion extends AppCompatActivity {
 
             //UsuariosBD userbd = new UsuariosBD(user, this, "Loguin", "", "", "");
             //userbd.execute();
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
 
         }
 
@@ -146,6 +151,7 @@ public class iniciar_sesion extends AppCompatActivity {
         String contrasena = txt_contrasena.getText().toString();
 
 
+
         if(!usuario.isEmpty() && !contrasena.isEmpty()) {
 
             user = new Usuarios();
@@ -179,4 +185,9 @@ public class iniciar_sesion extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ExitActivity.exitApplication(this);
+    }
 }

@@ -63,6 +63,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Set;
 
 import static java.security.AccessController.getContext;
 
@@ -107,8 +108,13 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private TextView titulo;
     private Spinner tipo_rutinas;
     private TimePicker picker;
-    private String Tipo_seteado;
-    ;
+    private String Tipo_seteado, day;
+    private static ArrayList<String> diasSpinner = new ArrayList<String>();
+    private Set<String> lista_dias_set;
+    private String[] lista_dias;
+    private Spinner spdias;
+    private Dias dias;
+
 
     //private static ArrayList<DiasXRutinas> listaPendientes = new ArrayList<DiasXRutinas>();
     private static  ArrayList<String> listaDias = new ArrayList<String>();
@@ -223,8 +229,42 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         this.apart = new Apartados();
         this.noti = new Notificaciones();
         this.user_destinatario = new Usuarios();
+    }
+
+    public RutinasBD(Context context, String que, Spinner spn){
+    diasSpinner.clear();
+    this.context = context;
+    this.que_hacer = que;
+    this.spdias = spn;
+    dialog = new ProgressDialog(context);
+}
 
 
+    public RutinasBD(Context ct, String que, ListView lv_pac, ListView lv_med, ListView lv_fami,
+                     TextView pac,TextView med,TextView fami,Usuarios u, String dayIn) {
+        usu = new Usuarios();
+        ses = new Session();
+        tipo = new TipoRutinas();
+        ses.setCt(ct);
+        ses.cargar_session();
+        usu = u;
+        this.context = ct;
+        this.que_hacer = que;
+        dialog = new ProgressDialog(ct);
+        no_hay_pacientes = true;
+        no_hay_familiares = true;
+        no_hay_medicos = true;
+        estado = new Estados();
+        estado_1 = new Estados();
+        estado_2 = new Estados();
+        rut = new Rutinas();
+        this.list_familiares = lv_fami;
+        this.list_pacientes = lv_pac;
+        this.list_medicos = lv_med;
+        this.no_hay_familiares_text = fami;
+        this.no_hay_medicos_text = med;
+        this.no_hay_pacientes_text = pac;
+        this.day = dayIn;
     }
 
     public RutinasBD(Context ct, Rutinas r, String que,Usuarios user){
@@ -254,6 +294,43 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         PreparedStatement ps;
         PreparedStatement ps_aux = null;
         //String estado = "";
+
+
+
+        if(que_hacer.equals("CargarSpinner")) {
+
+            boolean insertamos = true;
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(DatosBD.urlMySQL, DatosBD.user, DatosBD.pass);
+
+                ResultSet rs;
+                Statement st = con.createStatement();
+
+                rs = st.executeQuery("Select count(*) from dias");
+
+                while(rs.next()){
+                    lista_dias = new String[rs.getInt(1)];
+                }
+
+                rs = st.executeQuery("SELECT * from dias");
+
+                int i = 0;
+                diasSpinner.add("Todos");
+                while(rs.next()){
+
+                    diasSpinner.add(rs.getString("Descripcion"));
+
+                }
+                response = "Conexion exitosa";
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                //result2 = "Conexion no exitosa";
+                mensaje_devuelto = "Error al buscar los dias de la semana!";
+            }
+        }
 
 
         if(que_hacer.equals("RutinaPaciente")) {
@@ -838,7 +915,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
             }
         }
 
-        if(que_hacer.equals("CargarRutinas")) {
+        if(que_hacer.equals("CargarRutinas") || que_hacer.equals("CargarRutinasxDia") ) {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -861,12 +938,24 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                 if(rs.next())
                     estado_2.setId_estado(rs.getInt("idestado"));
 
-
+                if(que_hacer.equals("CargarRutinas"))
                     rs = st.executeQuery("SELECT tr.Descripcion as 'desc',r.Descripcion,r.Hora,r.idCreador,r.idRutina,r.Estado,u.nombre, u.apellido, r.idPaciente" +
                             " from rutinas r inner join usuarios u on u.idusuario = r.idcreador inner join tiporutinas tr on r.tiporutina=" +
                             " tr.idTipoRutina " +
-                            " where idPaciente="+ usu.getId_usuario() + " and (r.Estado=" + estado_1.getId_estado() + " or r.Estado="+
+                            " where idPaciente=" + usu.getId_usuario() + " and (r.Estado=" + estado_1.getId_estado() + " or r.Estado=" +
                             estado_2.getId_estado() + ")");
+                 else if(day.equals("Todos"))
+                    rs = st.executeQuery("SELECT DISTINCT tr.Descripcion as 'desc',r.Descripcion,r.Hora,r.idCreador,r.idRutina,r.Estado,u.nombre, u.apellido, r.idPaciente" +
+                            " from rutinas r inner join usuarios u on u.idusuario = r.idcreador inner join tiporutinas tr on r.tiporutina=" +
+                            " tr.idTipoRutina INNER JOIN diasrutina dr ON r.idrutina = dr.idRutina INNER JOIN dias d ON dr.idDia = d.idDia " +
+                            " where idPaciente=" + usu.getId_usuario() + " and (r.Estado=" + estado_1.getId_estado() + " or r.Estado=" +
+                            estado_2.getId_estado() + ")");
+                else
+                    rs = st.executeQuery("SELECT tr.Descripcion as 'desc',r.Descripcion,r.Hora,r.idCreador,r.idRutina,r.Estado,u.nombre, u.apellido, r.idPaciente" +
+                            " from rutinas r inner join usuarios u on u.idusuario = r.idcreador inner join tiporutinas tr on r.tiporutina=" +
+                            " tr.idTipoRutina INNER JOIN diasrutina dr ON r.idrutina = dr.idRutina INNER JOIN dias d ON dr.idDia = d.idDia " +
+                            " where idPaciente=" + usu.getId_usuario() + " and (r.Estado=" + estado_1.getId_estado() + " or r.Estado=" +
+                            estado_2.getId_estado() + ") AND d.Descripcion ='" + day + "'");
 
                     listaMedicos.clear();
                     listaFamiliares.clear();
@@ -1303,7 +1392,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
         }
 
-        if(que_hacer.equals("CargarRutinas")) {
+        if(que_hacer.equals("CargarRutinas") || que_hacer.equals("CargarRutinasxDia") ) {
 
 
             AdaptadorRutinasFamiliares adapter_fami = new AdaptadorRutinasFamiliares(context,listaFamiliares);
@@ -1415,6 +1504,12 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
                 }
             }
+        }
+
+         if(que_hacer.equals("CargarSpinner")) {
+
+            spdias.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, diasSpinner));
+            spdias.setSelection(0);
         }
 
         }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -40,6 +41,8 @@ public class RutinasFragment extends Fragment {
     private TextView no_familiares;
     private Session ses;
     private Usuarios usu;
+    private Spinner spinner;
+    private boolean spinner_arranco = false;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,10 +62,16 @@ public class RutinasFragment extends Fragment {
         no_misrutinas = root.findViewById(R.id.no_hay_misrutinas);
         no_familiares = root.findViewById(R.id.no_hay_rutinasfamiliares);
         no_profesionales = root.findViewById(R.id.no_hay_rutinasprofesionales);
+        spinner = (Spinner) root.findViewById(R.id.spn_diasrut);
+
+        // llamando a Async Task
+        RutinasBD vid = new RutinasBD(getContext(),"CargarSpinner",spinner);
+        vid.execute();
 
         ses = new Session();
         ses.setCt(getContext());
         ses.cargar_session();
+
 
         if(ses.getTipo_rol().equals("Paciente")) {
             usu = new Usuarios();
@@ -84,6 +93,41 @@ public class RutinasFragment extends Fragment {
                     no_misrutinas, no_profesionales, no_familiares,usu);
             rut.execute();
         }
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(spinner_arranco) {
+                    if(ses.getTipo_rol().equals("Paciente")) {
+                        usu = new Usuarios();
+                        usu.setId_usuario(ses.getId_usuario());
+                        RutinasBD rutsp = new RutinasBD(getContext(), "CargarRutinasxDia", l_misrutinas, l_profesionales, l_familiares,
+                                no_misrutinas, no_profesionales, no_familiares,usu,spinner.getSelectedItem().toString());
+                        rutsp.execute();
+                    }
+                    else{
+
+                        final Bundle datosRecuperados = getArguments();
+
+                        if (datosRecuperados != null) {
+                            usu = new Usuarios();
+                            usu.setId_usuario(datosRecuperados.getInt("PacienteRutinas"));
+                        }
+
+                        RutinasBD rutsp = new RutinasBD(getContext(), "CargarRutinasxDia", l_misrutinas, l_profesionales, l_familiares,
+                                no_misrutinas, no_profesionales, no_familiares,usu,spinner.getSelectedItem().toString());
+                        rutsp.execute();
+                    }
+                }
+                spinner_arranco = true;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         l_familiares.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.frgp.remember.Entidades.Apartados;
+import com.frgp.remember.Entidades.Estados;
 import com.frgp.remember.Entidades.Notificaciones;
 import com.frgp.remember.R;
 import com.frgp.remember.Entidades.Contactos;
@@ -115,7 +116,10 @@ public class AdaptadorNotificaciones extends ArrayAdapter<Notificaciones> implem
 
                         Notificaciones not = new Notificaciones();
                         Apartados apart = new Apartados();
+                        Estados est = new Estados();
 
+                        est.setId_estado(filterlist.get(i).getEstado().getId_estado());
+                        not.setEstado(est);
                         not.setDescripcion(filterlist.get(i).getDescripcion());
                         not.setHora(filterlist.get(i).getHora());
                         not.setIdNotificacion(filterlist.get(i).getIdNotificacion());

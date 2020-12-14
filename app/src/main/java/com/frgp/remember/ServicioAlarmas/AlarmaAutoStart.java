@@ -1,15 +1,15 @@
-package com.frgp.remember.ServicioNotificaciones;
+package com.frgp.remember.ServicioAlarmas;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
+import com.frgp.remember.ServicioNotificaciones.Alarm;
 import com.frgp.remember.Session.Session;
 
-public class AutoStart extends BroadcastReceiver
+public class AlarmaAutoStart extends BroadcastReceiver
 {
-    Alarm alarm = new Alarm();
+    Alarma alarm = new Alarma();
     private Session session;
     @Override
     public void onReceive(Context context, Intent intent)
@@ -21,7 +21,7 @@ public class AutoStart extends BroadcastReceiver
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()))
         {
             if(!session.getUsuario().equals(""))
-              alarm.setAlarm(context);
+                alarm.setAlarm(context);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
+import com.frgp.remember.Base.Rutinas.RutinasBD;
 import com.frgp.remember.Base.Usuarios.UsuariosBD;
 import com.frgp.remember.Dialogos.DialogoRecuperaciones;
 import com.frgp.remember.Dialogos.EditarContacto;
@@ -14,6 +15,7 @@ import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.R;
 import com.frgp.remember.IniciarSesion.iniciar_sesion;
 import com.frgp.remember.Servicio.SegundoPlano;
+import com.frgp.remember.ServicioAlarmas.Alarma;
 import com.frgp.remember.ServicioNotificaciones.Alarm;
 import com.frgp.remember.Session.Session;
 import com.frgp.remember.ui.Ayuda.AyudaFragment;
@@ -161,6 +163,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Alarm alarm = new Alarm();
         alarm.setAlarm(this);
+
+        Alarma alarma = new Alarma();
+        alarma.setAlarm(this);
+
+
+        RutinasBD rutinasBD = new RutinasBD(this,"VerificarRutinas");
+        rutinasBD.execute();
 
         NotificacionesBD nt = new NotificacionesBD(this,"VerificarNotificaciones");
         nt.execute();
@@ -345,6 +354,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ses.cerrar_session();
             Alarm alarm = new Alarm();
             alarm.cancelAlarm(this);
+            Alarma alarma = new Alarma();
+            alarma.cancelAlarm(this);
             Intent intent = new Intent(this, iniciar_sesion.class);
             startActivity(intent);
         } else if (id == R.id.nav_seguimiento) {

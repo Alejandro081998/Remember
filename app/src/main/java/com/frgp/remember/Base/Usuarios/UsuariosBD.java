@@ -30,6 +30,7 @@ import com.frgp.remember.Entidades.Familiares;
 import com.frgp.remember.Entidades.LogsUsuarios;
 import com.frgp.remember.Entidades.Pacientes;
 import com.frgp.remember.Entidades.Profesionales;
+import com.frgp.remember.Entidades.Seguimiento;
 import com.frgp.remember.Entidades.TipoRol;
 import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.IniciarSesion.iniciar_sesion;
@@ -57,6 +58,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
 
 
     private static final String TAG = "Usuario" ;
+    private Seguimiento seg;
     private Usuarios user;
     private TipoRol tipo;
     private Estados esta;
@@ -96,7 +98,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
     private ImageView imgseguimiento;
 
     private static ArrayList<Usuarios> listaUsuarios = new ArrayList<Usuarios>();
-    private static ArrayList<Bitmap> listaImagenes = new ArrayList<Bitmap>();
+    private static ArrayList<Seguimiento> listaImagenes = new ArrayList<Seguimiento>();
     private static ArrayList<LogsUsuarios> Listalogs = new ArrayList<LogsUsuarios>();
 
     public UsuariosBD(Usuarios us, Context ct, String que, String tiporol, String estados, String mat) {
@@ -841,6 +843,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                 while (rs.next()) {
                     no_hay_seg = false;
                     user = new Usuarios();
+                    seg = new Seguimiento();
                     //no_hay_usuarios = false;
                     user.setNombre(rs.getString("nombre"));
                     user.setId_usuario(rs.getInt("idusuario"));
@@ -866,8 +869,10 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
                         image = BitmapFactory.decodeResource(context.getResources(), R.mipmap.nodisponible);
                     }
 
-                    listaImagenes.add(image);
-                    listaUsuarios.add(user);
+                    seg.setUsuarios(user);
+                    seg.setImagen(image);
+
+                    listaImagenes.add(seg);
 
                 }
 
@@ -1087,7 +1092,7 @@ public class UsuariosBD extends AsyncTask<String, Void, String> {
 
         if(que_hacer.equals("ListarSeguimiento")) {
 
-            final AdaptadorSeguimiento adapter = new AdaptadorSeguimiento(context, listaUsuarios, listaImagenes);
+            final AdaptadorSeguimiento adapter = new AdaptadorSeguimiento(context, listaImagenes);
             lista_seguimiento.setAdapter(adapter);
 
             buscar_seguimiento.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

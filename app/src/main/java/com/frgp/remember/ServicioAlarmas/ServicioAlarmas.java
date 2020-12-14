@@ -1,15 +1,15 @@
-package com.frgp.remember.ServicioNotificaciones;
+package com.frgp.remember.ServicioAlarmas;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.frgp.remember.ServicioNotificaciones.Alarm;
 import com.frgp.remember.Session.Session;
 
-public class Servicio extends Service
+public class ServicioAlarmas extends Service
 {
-    Alarm alarm = new Alarm();
+    Alarma alarm = new Alarma();
     private Session session;
     public void onCreate()
     {
@@ -28,7 +28,7 @@ public class Servicio extends Service
         }else
             stopSelf();
 
-            return START_STICKY;
+        return START_STICKY;
     }
 
     @Override

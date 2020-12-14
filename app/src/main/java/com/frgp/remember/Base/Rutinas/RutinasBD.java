@@ -1,8 +1,14 @@
 package com.frgp.remember.Base.Rutinas;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,61 +17,50 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.frgp.remember.Adaptadores.AdaptadorNuevaVinculacion;
 import com.frgp.remember.Adaptadores.AdaptadorRutinasFamiliares;
 import com.frgp.remember.Adaptadores.AdaptadorRutinasPacientes;
 import com.frgp.remember.Adaptadores.AdaptadorRutinasProfesionales;
-import com.frgp.remember.Adaptadores.AdaptadorUsuariosVinculaciones;
 import com.frgp.remember.Base.Data.DatosBD;
 import com.frgp.remember.Base.LogsUsuariosBD.LogsBD;
 import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
-import com.frgp.remember.Base.TipoRutinas.TiposRutinasBD;
+import com.frgp.remember.Direccionamiento.DireccionamientoNotificaciones;
 import com.frgp.remember.Entidades.Apartados;
+import com.frgp.remember.Entidades.Avisos;
 import com.frgp.remember.Entidades.Dias;
 import com.frgp.remember.Entidades.DiasXRutinas;
 import com.frgp.remember.Entidades.Estados;
-import com.frgp.remember.Entidades.Familiares;
 import com.frgp.remember.Entidades.LogsUsuarios;
 import com.frgp.remember.Entidades.Notificaciones;
-import com.frgp.remember.Entidades.Pacientes;
-import com.frgp.remember.Entidades.Profesionales;
 import com.frgp.remember.Entidades.Rutinas;
-import com.frgp.remember.Entidades.TipoRol;
 import com.frgp.remember.Entidades.TipoRutinas;
 import com.frgp.remember.Entidades.Usuarios;
-import com.frgp.remember.Entidades.Vinculaciones;
-import com.frgp.remember.Principal.MainActivity;
 import com.frgp.remember.R;
 import com.frgp.remember.Session.Session;
-import com.frgp.remember.ui.ListadoContactos.ListadoContactosFragment;
-import com.frgp.remember.ui.Rutinas.NuevaRutina.NuevaRutinaFragment;
 import com.frgp.remember.ui.Rutinas.Raiz.RutinasFragment;
-import com.frgp.remember.ui.Vinculaciones.Listado.ListadoVinculacionesFragment;
-import com.frgp.remember.ui.Vinculaciones.ListadoProfesional.VinculacionesProfesionalFragment;
-import com.frgp.remember.ui.Vinculaciones.NuevaVinculacion.VinculacionesFragment;
-import com.frgp.remember.ui.Vinculaciones.Pendientes.VinculacionesPendientesFragment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Types;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
-import static java.security.AccessController.getContext;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 //import frgp.utn.edu.ar.consultas_mysql.adapter.ClienteAdapter;
 //import frgp.utn.edu.ar.consultas_mysql.entidad.Cliente;
@@ -75,6 +70,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
 
     private Rutinas rut;
+    private Avisos avi;
     private Apartados apart;
     private TipoRutinas tipo;
     private ArrayList<DiasXRutinas> dias_rutinas;
@@ -99,6 +95,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private boolean no_hay_pacientes;
     private boolean no_hay_familiares;
     private boolean no_hay_medicos;
+    private PendingIntent pendingIntent;
     private ListView list_familiares;
     private ListView list_pacientes;
     private ListView list_medicos;
@@ -113,7 +110,9 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private Set<String> lista_dias_set;
     private String[] lista_dias;
     private Spinner spdias;
+    private String fechaHoy;
     private Dias dias;
+    private String fecha;
 
 
     //private static ArrayList<DiasXRutinas> listaPendientes = new ArrayList<DiasXRutinas>();
@@ -123,6 +122,8 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private static ArrayList<Rutinas> listaPacientes = new ArrayList<Rutinas>();
     private static ArrayList<Rutinas> listaMedicos = new ArrayList<Rutinas>();
     private static ArrayList<String> datosSpinner = new ArrayList<String>();
+    private static ArrayList<Rutinas> listaRutinasUsuario = new ArrayList<Rutinas>();
+    private static ArrayList<Avisos> listaAvisosHoy = new ArrayList<Avisos>();
 
 
     public RutinasBD(Rutinas rt, ArrayList<String> diassel, String tiporut, Context ct, String que, Usuarios user) {
@@ -286,6 +287,29 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
     }
 
+    public RutinasBD(Context ct, Avisos a, String fecha, String que){
+
+        this.avi = new Avisos();
+        this.avi = a;
+        this.que_hacer = que;
+        this.context = ct;
+        dialog = new ProgressDialog(ct);
+        this.ses = new Session();
+        this.ses.setCt(ct);
+        this.ses.cargar_session();
+        this.fecha = fecha;
+
+    }
+
+    public RutinasBD(Context ct, String que){
+        this.context = ct;
+        ses = new Session();
+        ses.setCt(ct);
+        ses.cargar_session();
+        this.que_hacer = que;
+        dialog = new ProgressDialog(ct);
+    }
+
 
     @Override
     protected String doInBackground(String... urls) {
@@ -295,7 +319,43 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         PreparedStatement ps_aux = null;
         //String estado = "";
 
+        if (que_hacer.equals("AvisoAlarma")) {
 
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(DatosBD.urlMySQL, DatosBD.user, DatosBD.pass);
+                //ps = con.prepareStatement("INSERT INTO usuarios(id, nombre,stock,alertastock,idCategoria) VALUES(?,?,?,?,?)");
+
+                Statement st = con.createStatement();
+                ResultSet rs;
+
+                Calendar fechaActual = Calendar.getInstance();
+
+                fechaActual.set(fechaActual.get(Calendar.YEAR),fechaActual.get(Calendar.MONTH),
+                        fechaActual.get(Calendar.DATE),fechaActual.get(Calendar.HOUR_OF_DAY),
+                        fechaActual.get(Calendar.MINUTE), fechaActual.get(Calendar.SECOND));
+
+                ps = con.prepareStatement("INSERT INTO Avisos (idRutina, Dia) Values(?,?)");
+
+                ps.setInt(1, avi.getId_rutina().getId_rutina());
+                ps.setString(2, fecha);
+
+                int filas = ps.executeUpdate();
+
+                if (filas > 0)
+                    Log.d("Aviso INSERTADO", "OK ID:" + avi.getId_rutina().getId_rutina());
+                else
+                    Log.d("Aviso INSERTADO", "NO");
+
+
+                response = "Conexion exitosa";
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                //result2 = "Conexion no exitosa";
+                mensaje_devuelto = "Error al modificar Aviso!";
+            }
+        }
 
         if(que_hacer.equals("CargarSpinner")) {
 
@@ -331,7 +391,6 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                 mensaje_devuelto = "Error al buscar los dias de la semana!";
             }
         }
-
 
         if(que_hacer.equals("RutinaPaciente")) {
 
@@ -1015,6 +1074,104 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
         }
 
+        if(que_hacer.equals("VerificarRutinas")) {
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(DatosBD.urlMySQL, DatosBD.user, DatosBD.pass);
+                //ps = con.prepareStatement("INSERT INTO usuarios(id, nombre,stock,alertastock,idCategoria) VALUES(?,?,?,?,?)");
+
+                ResultSet rs;
+                Statement st = con.createStatement();
+
+                Calendar fechaActual = Calendar.getInstance();
+
+                fechaActual.set(fechaActual.get(Calendar.YEAR),fechaActual.get(Calendar.MONTH),
+                        fechaActual.get(Calendar.DATE),fechaActual.get(Calendar.HOUR_OF_DAY),
+                        fechaActual.get(Calendar.MINUTE),fechaActual.get(Calendar.SECOND));
+
+                String Dia = "";
+
+                String[] strDays = new String[]{
+                        "Domingo",
+                        "Lunes",
+                        "Martes",
+                        "Miercoles",
+                        "Jueves",
+                        "Viernes",
+                        "Sabado"};
+
+                Dia = strDays[fechaActual.get(Calendar.DAY_OF_WEEK) - 1];
+
+                rs = st.executeQuery("SELECT r.idrutina,r.Descripcion, r.idpaciente, r.Hora," +
+                        " dd.Descripcion, e.estado FROM `rutinas` r inner join diasrutina d ON r.idrutina = "+
+                                "d.idRutina inner join dias dd on d.idDia = dd.idDia inner join estados e on r.Estado"+
+                                "= e.idestado where e.estado = 'Activa' and dd.Descripcion = '" + Dia + "' and" +
+                        " r.idpaciente =" + ses.getId_usuario());
+
+                listaRutinasUsuario.clear();
+                listaAvisosHoy.clear();
+
+                while(rs.next()){
+                    Log.d("RUTINAS: ", "USUARIO TIENE RUTINAS EL " + Dia);
+                    rut = new Rutinas();
+                    rut.setDescripcion(rs.getString(2));
+                    rut.setId_rutina(rs.getInt(1));
+                    rut.setHora(rs.getTime(4));
+                    listaRutinasUsuario.add(rut);
+                }
+
+                fechaHoy = "" + fechaActual.get(Calendar.YEAR) + "-" + (fechaActual.get(Calendar.MONTH) + 1) +
+                "-" + fechaActual.get(Calendar.DATE);
+
+                Log.d("FECHA HOY:", " " + fechaHoy);
+
+                rs = st.executeQuery("SELECT * from Avisos where Dia = '" + fechaHoy + "'");
+
+                while (rs.next()){
+                    Log.d("AVISOS: ", "HAY AVISOS EL " + fechaHoy);
+                    rut = new Rutinas();
+                    avi = new Avisos();
+                    rut.setId_rutina(rs.getInt("idRutina"));
+                    avi.setId_rutina(rut);
+                    listaAvisosHoy.add(avi);
+                }
+
+
+                for(Avisos av: listaAvisosHoy){
+                    for(Rutinas rut: listaRutinasUsuario){
+                        if(av.getId_rutina().getId_rutina() == rut.getId_rutina()){
+                            listaRutinasUsuario.remove(rut);
+                            Log.d("AVISOS HOY:", " Borre la rutina " + rut.getId_rutina() + " porque " +
+                                    "ya se notifico");
+                        }
+                    }
+                }
+
+                for(Rutinas rut: listaRutinasUsuario){
+
+                    Calendar fechaSeteada = Calendar.getInstance();
+                    fechaSeteada.set(fechaActual.get(Calendar.YEAR),fechaActual.get(Calendar.MONTH),
+                            fechaActual.get(Calendar.DATE),rut.getHora().getHours(),rut.getHora().getMinutes(),
+                            rut.getHora().getSeconds());
+
+                    if(fechaSeteada.after(fechaActual)) {
+                        listaRutinasUsuario.remove(rut);
+                        Log.d("HORA TODAVIA NO: ", " Todavia no es hora de la rutina " + rut.getId_rutina());
+                    }
+                }
+
+                response = "Conexion exitosa";
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                //result2 = "Conexion no exitosa";
+                mensaje_devuelto = "Error al buscar rutinas paciente!";
+            }
+
+
+        }
+
         if(que_hacer.equals("CargarRutinaEditar")) {
 
             try {
@@ -1267,10 +1424,14 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        dialog.setMessage("Procesando...");
-        dialog.show();
+
+        if(!que_hacer.equals("VerificarRutinas") && !que_hacer.equals("AvisoAlarma")) {
+            dialog.setMessage("Procesando...");
+            dialog.show();
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onPostExecute(String response) {
 
@@ -1512,7 +1673,71 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
             spdias.setSelection(0);
         }
 
+        if(que_hacer.equals("VerificarRutinas")){
+
+            for(Rutinas rut: listaRutinasUsuario){
+                Log.d("ES HORA: ", "ES HORA DE LA RUTINA: " + rut.getId_rutina());
+                setPendingIntent(rut.getId_rutina(),"RutinasAlarma");
+                CreateNotificationChannel();
+                CreateNotification(rut.getDescripcion() + " - " + fechaHoy,rut.getId_rutina(),rut.getHora());
+            }
         }
 
+        }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void setPendingIntent(int notif, String apartado) {
+
+        Intent notificationIntent = new Intent(context, DireccionamientoNotificaciones.class);
+        notificationIntent.putExtra("apartado",apartado);
+        notificationIntent.putExtra("noti",notif);
+        notificationIntent.putExtra("dia_rutina",fechaHoy);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(DireccionamientoNotificaciones.class);
+        stackBuilder.addNextIntent(notificationIntent);
+        pendingIntent = stackBuilder.getPendingIntent(notif, PendingIntent.FLAG_CANCEL_CURRENT);
+
     }
+
+    private void CreateNotificationChannel(){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+
+            String CHANNEL_ID = "NOTIFICACION_ALARMAS";
+
+            CharSequence name = "Notificacion_ALARMAS";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) (context).getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    private void CreateNotification(String desc, int notif, Time time){
+
+        //notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //notificationIntent.putExtra("apartado",not.getIdApartado().getDescripcion());
+
+
+        String CHANNEL_ID = "NOTIFICACION_ALARMAS";
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_alarm);
+        builder.setContentTitle("RememberMe");
+        builder.setContentText(desc + " - "  + time.getHours() + ":" + time.getMinutes());
+        builder.setColor(Color.RED);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.MAGENTA,1000,1000);
+        builder.setVibrate(new long[]{1000,1000,1000,1000,1000,1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        notificationManagerCompat.notify(notif,builder.build());
+
+    }
+
+
+    }
+
+
 

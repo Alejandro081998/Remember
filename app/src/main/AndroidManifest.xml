@@ -49,17 +49,35 @@
 
         <receiver android:process=":remote" android:name=".ServicioNotificaciones.Alarm"></receiver>
 
-<!--        <receiver android:name=".AutoStart">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.BOOT_COMPLETED"></action>-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+        <receiver android:process=":remote" android:name=".ServicioAlarmas.Alarma"></receiver>
 
-<!--        <service-->
-<!--            android:name=".Servicio"-->
-<!--            android:enabled="true"-->
-<!--            android:process=":Servicio" >-->
-<!--        </service>-->
+        <receiver android:name=".ServicioAlarmas.AlarmaAutoStart"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name = "android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".ServicioNotificaciones.AutoStart"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
+            android:enabled="true">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <category android:name = "android.intent.category.DEFAULT" />
+        </intent-filter>
+    </receiver>
+
+        <service android:name=".ServicioAlarmas.ServicioAlarmas"
+            android:enabled="true">
+        </service>
+
+    <service android:name=".ServicioNotificaciones.Servicio"
+        android:enabled="true">
+    </service>
 
     </application>
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorCelesteC">
 
@@ -20,62 +20,116 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageButton
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/editar_foto"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/marco_celeste"
+                    android:layout_gravity="center"
                     android:layout_width="126dp"
                     android:layout_height="110dp"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="2dp"
                     android:src="@mipmap/nodisponible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/txt_usuario_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="25dp"
-                    android:textStyle="bold|italic" />
+                    android:layout_column="1"
+                    android:textSize="28dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="cursive"
+                    android:text="Alejandro9"
+                    android:textColor="#403C3C"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
 
                 <ImageButton
                     android:layout_width="30dp"
                     android:id="@+id/btn_editar_perfil"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="20dp"
                     android:src="@drawable/ic_edit"
                     android:background="@android:color/transparent"
                     android:layout_height="20dp"></ImageButton>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:layout_marginRight="150dp"
+                android:text="@string/Nombre" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text="@string/Apellido" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txt_perfil_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="150dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/txt_perfil_apellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:inputType="textPersonName" />
 
             </LinearLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5sp"
-                android:background="@drawable/marco_celeste">
+                android:layout_margin="5sp">
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10sp">
 
-                    <TextView
-                        android:id="@+id/textView25"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Nombre" />
 
-                    <TextView
-                        android:id="@+id/textView26"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Apellido" />
+
+
 
                 </TableRow>
 
@@ -84,23 +138,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10sp">
 
-                    <EditText
-                        android:id="@+id/txt_perfil_nombre"
-                        android:layout_width="162dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="textPersonName" />
 
-                    <EditText
-                        android:id="@+id/txt_perfil_apellido"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="textPersonName" />
 
                 </TableRow>
 
@@ -242,7 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:background="@drawable/marco_celeste">
+                android:background="@drawable/marco_celeste_foto">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -367,7 +405,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:background="@drawable/marco_celeste">
+                android:background="@drawable/marco_celeste_foto">
 
                 <TableRow
                     android:layout_width="match_parent"

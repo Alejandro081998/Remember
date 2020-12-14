@@ -70,7 +70,7 @@
                 android:layout_width="304dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/marco_celeste"
+                android:background="@drawable/marco_celeste_foto"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_gravity="center"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@drawable/marco_celeste">
+                android:background="@drawable/marco_celeste_foto">
 
                 <TableLayout
                     android:layout_width="match_parent"

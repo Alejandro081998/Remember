@@ -45,6 +45,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PerfilFragment extends Fragment {
 
     private PerfilViewModel perfilViewModel;
@@ -69,7 +71,7 @@ public class PerfilFragment extends Fragment {
     private TableLayout apartado_ingreso;
     private Button btn_ficha;
     private Button btn_ingresos;
-    private ImageButton btn_foto;
+    private CircleImageView btn_foto;
     private TextView no_hay_vin;
     private ListView lvinculaciones;
     private Button nueva_vinculacion;
@@ -107,7 +109,7 @@ public class PerfilFragment extends Fragment {
         no_hay_vin = (TextView) root.findViewById(R.id.no_hay_vinculaciones);
         lvinculaciones = (ListView) root.findViewById(R.id.list_vinculaciones);
         nueva_vinculacion = (Button) root.findViewById(R.id.btn_nueva_vinculacion);
-        btn_foto = (ImageButton) root.findViewById(R.id.editar_foto);
+        btn_foto = (CircleImageView) root.findViewById(R.id.editar_foto);
         user = new Usuarios();
         pac = new Pacientes();
         usu_mostrar = (TextView) root.findViewById(R.id.txt_usuario_home);

@@ -26,11 +26,13 @@ import com.frgp.remember.ui.Vinculaciones.Listado.ListadoVinculacionesFragment;
 import com.frgp.remember.ui.Vinculaciones.ListadoProfesional.VinculacionesProfesionalFragment;
 import com.frgp.remember.ui.Vinculaciones.Pendientes.VinculacionesPendientesFragment;
 
+import java.sql.Time;
+
 public class DireccionamientoNotificaciones extends AppCompatActivity {
 
     private String apartado = "";
     private Session session;
-    private String fecha = "";
+    private String fecha = "",hora = "";
     private int id_noti;
     public static final String TAG = "LOG";
 
@@ -46,6 +48,7 @@ public class DireccionamientoNotificaciones extends AppCompatActivity {
         apartado = getIntent().getStringExtra("apartado");
         id_noti = getIntent().getIntExtra("noti",-1);
         fecha = getIntent().getStringExtra("dia_rutina");
+        hora = getIntent().getStringExtra("horaRutina");
         session = new Session();
         session.setCt(this);
         session.cargar_session();
@@ -71,7 +74,7 @@ public class DireccionamientoNotificaciones extends AppCompatActivity {
                 rutinas.setId_rutina(id_noti);
                 avisos.setId_rutina(rutinas);
 
-                RutinasBD rutinasBD = new RutinasBD(this,avisos, fecha,"AvisoAlarma");
+                RutinasBD rutinasBD = new RutinasBD(this,avisos, fecha, hora,"AvisoAlarma");
                 rutinasBD.execute();
             }
 

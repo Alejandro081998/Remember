@@ -46,6 +46,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 //import frgp.utn.edu.ar.consultas_mysql.adapter.ClienteAdapter;
 //import frgp.utn.edu.ar.consultas_mysql.entidad.Cliente;
 
@@ -82,7 +84,7 @@ public class PerfilBD extends AsyncTask<String, Void, String> {
     private Boolean no_hay_vincu;
     private TextView no_hay;
     private ListView list_vinculaciones;
-    private ImageButton imagen_perfil;
+    private CircleImageView imagen_perfil;
     private Bitmap image = null;
     private boolean imagen_nula;
 
@@ -92,7 +94,7 @@ public class PerfilBD extends AsyncTask<String, Void, String> {
     public PerfilBD(Context ct, String que, EditText nom, EditText ape, EditText dni, EditText fechanac, RadioButton fem,
                     RadioButton mas, EditText mail,
                     EditText usu, EditText contra, EditText repito, EditText pes, EditText alt, Spinner fac, EditText med,
-                    TextView no, ListView list, ImageButton img, TextView usu_mostrar) {
+                    TextView no, ListView list, CircleImageView img, TextView usu_mostrar) {
 
         listaVinculaciones.clear();
         //listaUsuarios.clear();

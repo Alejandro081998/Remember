@@ -112,7 +112,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private Spinner spdias;
     private String fechaHoy;
     private Dias dias;
-    private String fecha;
+    private String fecha,hora;
 
 
     //private static ArrayList<DiasXRutinas> listaPendientes = new ArrayList<DiasXRutinas>();
@@ -287,7 +287,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
     }
 
-    public RutinasBD(Context ct, Avisos a, String fecha, String que){
+    public RutinasBD(Context ct, Avisos a, String fecha, String hora, String que){
 
         this.avi = new Avisos();
         this.avi = a;
@@ -298,6 +298,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         this.ses.setCt(ct);
         this.ses.cargar_session();
         this.fecha = fecha;
+        this.hora = hora;
 
     }
 
@@ -335,10 +336,11 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                         fechaActual.get(Calendar.DATE),fechaActual.get(Calendar.HOUR_OF_DAY),
                         fechaActual.get(Calendar.MINUTE), fechaActual.get(Calendar.SECOND));
 
-                ps = con.prepareStatement("INSERT INTO Avisos (idRutina, Dia) Values(?,?)");
+                ps = con.prepareStatement("INSERT INTO Avisos (idRutina, Dia, horaRutina) Values(?,?,?)");
 
                 ps.setInt(1, avi.getId_rutina().getId_rutina());
                 ps.setString(2, fecha);
+                ps.setString(3,hora);
 
                 int filas = ps.executeUpdate();
 
@@ -1134,13 +1136,15 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                     avi = new Avisos();
                     rut.setId_rutina(rs.getInt("idRutina"));
                     avi.setId_rutina(rut);
+                    avi.setHoraRutina(rs.getTime("horaRutina"));
                     listaAvisosHoy.add(avi);
                 }
 
 
                 for(Avisos av: listaAvisosHoy){
                     for(Rutinas rut: listaRutinasUsuario){
-                        if(av.getId_rutina().getId_rutina() == rut.getId_rutina()){
+                        if(av.getId_rutina().getId_rutina() == rut.getId_rutina()
+                        && av.getHoraRutina().equals(rut.getHora())){
                             listaRutinasUsuario.remove(rut);
                             Log.d("AVISOS HOY:", " Borre la rutina " + rut.getId_rutina() + " porque " +
                                     "ya se notifico");
@@ -1677,7 +1681,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
             for(Rutinas rut: listaRutinasUsuario){
                 Log.d("ES HORA: ", "ES HORA DE LA RUTINA: " + rut.getId_rutina());
-                setPendingIntent(rut.getId_rutina(),"RutinasAlarma");
+                setPendingIntent(rut.getId_rutina(),"RutinasAlarma",rut.getHora());
                 CreateNotificationChannel();
                 CreateNotification(rut.getDescripcion() + " - " + fechaHoy,rut.getId_rutina(),rut.getHora());
             }
@@ -1686,12 +1690,15 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void setPendingIntent(int notif, String apartado) {
+    private void setPendingIntent(int notif, String apartado, Time horaRutina) {
+
+        String hora = horaRutina.getHours() + ":" + horaRutina.getMinutes() + ":00";
 
         Intent notificationIntent = new Intent(context, DireccionamientoNotificaciones.class);
         notificationIntent.putExtra("apartado",apartado);
         notificationIntent.putExtra("noti",notif);
         notificationIntent.putExtra("dia_rutina",fechaHoy);
+        notificationIntent.putExtra("horaRutina",hora);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(DireccionamientoNotificaciones.class);
         stackBuilder.addNextIntent(notificationIntent);

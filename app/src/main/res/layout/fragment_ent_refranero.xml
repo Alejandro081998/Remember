@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_width="208dp"
                 android:layout_height="49dp"
-                android:background="@drawable/marco_celeste">
+                android:background="@drawable/marco_celeste_foto">
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -46,7 +46,7 @@
                 android:layout_width="80dp"
                 android:layout_height="49dp"
                 android:layout_marginLeft="30sp"
-                android:background="@drawable/marco_celeste">
+                android:background="@drawable/marco_celeste_foto">
 
                 >
 
@@ -71,7 +71,7 @@
         android:layout_marginLeft="20sp"
         android:layout_marginTop="50sp"
         android:layout_marginRight="20sp"
-        android:background="@drawable/marco_celeste"
+        android:background="@drawable/marco_celeste_foto"
         android:orientation="vertical">
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_marginLeft="80sp"
             android:layout_marginTop="80sp"
             android:layout_marginRight="80sp"
-            android:background="@drawable/marco_celeste"
+            android:background="@drawable/marco_celeste_foto"
             android:text="Enviar" />
     </LinearLayout>
 

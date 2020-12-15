@@ -404,6 +404,8 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
                 if (rs.next())
                     estado1.setId_estado(rs.getInt("idestado"));
 
+                Log.d("USUARIONOTIFICACIONES: ", "" + ses.getId_usuario());
+
 //                rs = st.executeQuery("SELECT * FROM notificaciones where Envio=" + estado1.getId_estado() + " and" +
 //                        " idDestinatario=" + ses.getId_usuario());
 

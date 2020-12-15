@@ -78,6 +78,7 @@ public class PerfilFragment extends Fragment {
     private ImageButton btn_imagen;
     private TextView usu_mostrar;
     private ImageButton btn_editar;
+    private Session ses;
 
 
 
@@ -131,7 +132,7 @@ public class PerfilFragment extends Fragment {
                 repito,peso,altura,factor,medico,no_hay_vin,lvinculaciones,btn_foto,usu_mostrar);
         perfil.execute();
 
-        final Session ses = new Session();
+        ses = new Session();
         ses.setCt(getContext());
         ses.cargar_session();
 

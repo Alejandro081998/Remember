@@ -123,6 +123,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     private static ArrayList<Rutinas> listaMedicos = new ArrayList<Rutinas>();
     private static ArrayList<String> datosSpinner = new ArrayList<String>();
     private static ArrayList<Rutinas> listaRutinasUsuario = new ArrayList<Rutinas>();
+    private static ArrayList<Rutinas> listaRutinasUsuarioAuxiliar = new ArrayList<Rutinas>();
     private static ArrayList<Avisos> listaAvisosHoy = new ArrayList<Avisos>();
 
 
@@ -1094,6 +1095,8 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
                 String Dia = "";
 
+                Log.d("USUARIORUTINAS: ", "" + ses.getId_usuario());
+
                 String[] strDays = new String[]{
                         "Domingo",
                         "Lunes",
@@ -1113,6 +1116,7 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
 
                 listaRutinasUsuario.clear();
                 listaAvisosHoy.clear();
+                listaRutinasUsuarioAuxiliar.clear();
 
                 while(rs.next()){
                     Log.d("RUTINAS: ", "USUARIO TIENE RUTINAS EL " + Dia);
@@ -1140,9 +1144,11 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                     listaAvisosHoy.add(avi);
                 }
 
+                listaRutinasUsuarioAuxiliar.addAll(listaRutinasUsuario);
+
 
                 for(Avisos av: listaAvisosHoy){
-                    for(Rutinas rut: listaRutinasUsuario){
+                    for(Rutinas rut: listaRutinasUsuarioAuxiliar){
                         if(av.getId_rutina().getId_rutina() == rut.getId_rutina()
                         && av.getHoraRutina().equals(rut.getHora())){
                             listaRutinasUsuario.remove(rut);

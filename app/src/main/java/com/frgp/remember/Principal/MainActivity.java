@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView nav_seguimiento;
     private TextView txt_nombre;
     private ImageView img;
+    private Alarma rutinas;
+    private Alarm notificaciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,18 +163,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.bringToFront();
         navigationView.setItemIconTintList(null);
 
-        Alarm alarm = new Alarm();
-        alarm.setAlarm(this);
+        rutinas = new Alarma();
+        notificaciones = new Alarm();
 
-        Alarma alarma = new Alarma();
-        alarma.setAlarm(this);
+        rutinas.setAlarm(getApplicationContext());
+        notificaciones.setAlarm(getApplicationContext());
 
 
-        RutinasBD rutinasBD = new RutinasBD(this,"VerificarRutinas");
+
+        /*RutinasBD rutinasBD = new RutinasBD(this,"VerificarRutinas");
         rutinasBD.execute();
 
         NotificacionesBD nt = new NotificacionesBD(this,"VerificarNotificaciones");
-        nt.execute();
+        nt.execute();*/
 
         txt_nombre.setText("Hola " + ses.getUsuario());
 
@@ -352,10 +355,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_cerrar) {
             ses.setCt(this);
             ses.cerrar_session();
-            Alarm alarm = new Alarm();
-            alarm.cancelAlarm(this);
-            Alarma alarma = new Alarma();
-            alarma.cancelAlarm(this);
+            notificaciones.cancelAlarm(getApplicationContext());
+            rutinas.cancelAlarm(getApplicationContext());
             Intent intent = new Intent(this, iniciar_sesion.class);
             startActivity(intent);
         } else if (id == R.id.nav_seguimiento) {

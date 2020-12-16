@@ -1740,7 +1740,23 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_alarm);
         builder.setContentTitle("RememberMe");
-        builder.setContentText(desc + " - "  + time.getHours() + ":" + time.getMinutes());
+
+        String hora_ = "";
+        String minutos_ = "";
+
+        if(time.getHours() < 10 ){
+            hora_ = "0" + time.getHours();
+        }else{
+            hora_ = "" + time.getHours();
+        }
+
+        if(time.getMinutes() < 10 ){
+            minutos_ = "0" + time.getMinutes();
+        }else{
+            minutos_ = "" + time.getMinutes();
+        }
+
+        builder.setContentText(desc + " - "  + hora_ + ":" + minutos_);
         builder.setColor(Color.RED);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA,1000,1000);

@@ -1439,8 +1439,9 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
     protected void onPreExecute() {
 
         if(!que_hacer.equals("VerificarRutinas") && !que_hacer.equals("AvisoAlarma")) {
-            dialog.setMessage("Procesando...");
             dialog.show();
+            dialog.setContentView(R.layout.progress_dialog);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
 

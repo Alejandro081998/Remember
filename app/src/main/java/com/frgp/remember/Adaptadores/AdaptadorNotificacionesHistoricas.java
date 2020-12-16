@@ -66,8 +66,25 @@ public class AdaptadorNotificacionesHistoricas extends ArrayAdapter<Notificacion
         TextView destinatario = (TextView) item.findViewById(R.id.txt_id_receptor);
         TextView apart_descripcion = (TextView) item.findViewById(R.id.txt_apart_descrip);
 
+
+        String hora_ = "";
+        String minutos_ = "";
+
+        if(getItem(position).getHora().getHours() < 10 ){
+            hora_ = "0" + getItem(position).getHora().getHours();
+        }else{
+            hora_ = "" + getItem(position).getHora().getHours();
+        }
+
+        if(getItem(position).getHora().getMinutes() < 10 ){
+            minutos_ = "0" + getItem(position).getHora().getMinutes();
+        }else{
+            minutos_ = "" + getItem(position).getHora().getMinutes();
+        }
+
+
         descripcion.setText(getItem(position).getDescripcion());
-        hora.setText("" + +getItem(position).getHora().getDate() + "/" + (getItem(position).getHora().getMonth() + 1) + " - "  + getItem(position).getHora().getHours() + ":" + getItem(position).getHora().getMinutes() );
+        hora.setText("" + +getItem(position).getHora().getDate() + "/" + (getItem(position).getHora().getMonth() + 1) + " - "  + hora_ + ":" + minutos_ );
         id_notificacion.setText("" + getItem(position).getIdNotificacion());
         idapartado.setText("" + getItem(position).getIdApartado().getIdApartado());
         remitente.setText("" + getItem(position).getIdRemitente());

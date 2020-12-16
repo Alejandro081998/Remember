@@ -52,6 +52,9 @@ public class DetallePerfilFragment extends Fragment {
         altura = (TextView) root.findViewById(R.id.txt_altura);
         factor = (TextView) root.findViewById(R.id.txt_factor);
 
+        listalogs.addFooterView(new View(getContext()), null, true);
+        listalogs.addHeaderView(new View(getContext()), null, true);
+
         final Bundle datosRecuperados = getArguments();
 
         if (datosRecuperados != null) {

@@ -60,6 +60,9 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
                 app:fab_label="@string/imagenes"
+                app:fab_colorNormal="#35B2D8"
+                app:fab_colorPressed="#35B2D8"
+                app:fab_colorDisabled="#35B2D8"
                 android:src="@drawable/ic_imagenes" />
 
 
@@ -70,6 +73,9 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
                 app:fab_label="@string/contactos"
+                app:fab_colorNormal="#35B2D8"
+                app:fab_colorPressed="#35B2D8"
+                app:fab_colorDisabled="#35B2D8"
                 android:src="@drawable/ic_contactos"/>
 
             <com.github.clans.fab.FloatingActionButton
@@ -79,6 +85,9 @@
                 android:layout_gravity="bottom|end"
                 app:fab_label="@string/Vinculaciones"
                 android:layout_margin="@dimen/fab_margin"
+                app:fab_colorNormal="#35B2D8"
+                app:fab_colorPressed="#35B2D8"
+                app:fab_colorDisabled="#35B2D8"
                 android:src="@drawable/ic_vinculaciones"/>
 
         </com.github.clans.fab.FloatingActionMenu>
@@ -99,6 +108,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/fab_margin"
+        app:fab_colorNormal="#35B2D8"
+        app:fab_colorPressed="#35B2D8"
+        app:fab_colorDisabled="#35B2D8"
         android:src="@drawable/ic_add"/>
 
     <com.github.clans.fab.FloatingActionButton
@@ -109,6 +121,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/fab_margin"
+        app:fab_colorNormal="#35B2D8"
+        app:fab_colorPressed="#35B2D8"
+        app:fab_colorDisabled="#35B2D8"
         android:src="@drawable/ic_alerta"/>
 
 

@@ -17,6 +17,7 @@ import com.frgp.remember.Entidades.Estados;
 import com.frgp.remember.Entidades.LogsUsuarios;
 import com.frgp.remember.Entidades.Notificaciones;
 import com.frgp.remember.Entidades.Usuarios;
+import com.frgp.remember.R;
 import com.frgp.remember.Session.Session;
 
 import java.sql.Connection;
@@ -128,8 +129,9 @@ public class LogsBD extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         if(que_hacer.equals("CargarNotificaciones")) {
-            dialog.setMessage("Procesando...");
             dialog.show();
+            dialog.setContentView(R.layout.progress_dialog);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
 

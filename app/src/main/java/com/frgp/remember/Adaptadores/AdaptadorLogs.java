@@ -52,8 +52,26 @@ public class AdaptadorLogs extends ArrayAdapter <LogsUsuarios> {
         TextView usulog = (TextView) item.findViewById(R.id.txtvLog);
         TextView feclog = (TextView) item.findViewById(R.id.fechahora) ;
 
+
+        String hora_ = "";
+        String minutos_ = "";
+
+        if(getItem(position).getFecha_hora_log().getHours() < 10 ){
+            hora_ = "0" + getItem(position).getFecha_hora_log().getHours();
+        }else{
+            hora_ = "" + getItem(position).getFecha_hora_log().getHours();
+        }
+
+        if(getItem(position).getFecha_hora_log().getMinutes() < 10 ){
+            minutos_ = "0" + getItem(position).getFecha_hora_log().getMinutes();
+        }else{
+            minutos_ = "" + getItem(position).getFecha_hora_log().getMinutes();
+        }
+
+
+
         usulog.setText(getItem(position).getLogdesc());
-        feclog.setText("" + +getItem(position).getFecha_hora_log().getDate() + "/" + (getItem(position).getFecha_hora_log().getMonth() + 1) + " - "  + getItem(position).getFecha_hora_log().getHours() + ":" + getItem(position).getFecha_hora_log().getMinutes() );
+        feclog.setText("" + +getItem(position).getFecha_hora_log().getDate() + "/" + (getItem(position).getFecha_hora_log().getMonth() + 1) + " - "  + hora_ + ":" + minutos_ );
 
 
 

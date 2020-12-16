@@ -924,8 +924,9 @@ public class VinculacionesBD extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        dialog.setMessage("Procesando...");
         dialog.show();
+        dialog.setContentView(R.layout.progress_dialog);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
     @Override

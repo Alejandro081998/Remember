@@ -14,6 +14,7 @@ import com.frgp.remember.Base.Data.DatosBD;
 import com.frgp.remember.Entidades.Recuperaciones;
 import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.IniciarSesion.iniciar_sesion;
+import com.frgp.remember.R;
 import com.frgp.remember.Session.Session;
 
 import java.sql.Connection;
@@ -256,8 +257,9 @@ public class RecuperacionesBD  extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        dialog.setMessage("Procesando...");
         dialog.show();
+        dialog.setContentView(R.layout.progress_dialog);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
     @Override

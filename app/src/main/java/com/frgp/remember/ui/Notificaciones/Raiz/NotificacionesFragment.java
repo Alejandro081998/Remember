@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class NotificacionesFragment extends Fragment {
     private TextView no_hay_notificaciones;
     private SearchView buscar_notificacion;
     private Session ses;
-    private Button btn_historico;
+    private ImageButton btn_historico;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,12 +60,15 @@ public class NotificacionesFragment extends Fragment {
         list_notificaciones = (ListView) root.findViewById(R.id.list_notificaciones);
         no_hay_notificaciones = (TextView) root.findViewById(R.id.no_hay_notificaciones);
         buscar_notificacion = (SearchView) root.findViewById(R.id.buscar_notificacion);
-        btn_historico = (Button) root.findViewById(R.id.btn_historico);
+        btn_historico = (ImageButton) root.findViewById(R.id.btn_historico);
 
         ses = new Session();
         ses.setCt(getContext());
         ses.cargar_session();
 
+
+        list_notificaciones.addFooterView(new View(getContext()), null, true);
+        list_notificaciones.addHeaderView(new View(getContext()), null, true);
 
 
         NotificacionesBD not = new NotificacionesBD(getContext(),"CargarNotificaciones",no_hay_notificaciones,list_notificaciones,buscar_notificacion   );

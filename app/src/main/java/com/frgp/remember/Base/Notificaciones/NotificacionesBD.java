@@ -468,8 +468,9 @@ public class NotificacionesBD extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         if(que_hacer.equals("CargarNotificaciones") || que_hacer.equals("CargarNotificacionesHistoricas")) {
-            dialog.setMessage("Procesando...");
             dialog.show();
+            dialog.setContentView(R.layout.progress_dialog);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
 

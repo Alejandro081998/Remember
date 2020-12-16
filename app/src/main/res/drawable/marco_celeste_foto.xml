@@ -3,7 +3,7 @@
 
     <solid android:color="@color/colorCelesteC"/>
 
-    <stroke android:width="2dp" android:color="@color/colorCelesteD" />
+    <stroke android:width="0.5dp" android:color="@color/colorCelesteD" />
 
     <corners android:radius="10dp"/>
 

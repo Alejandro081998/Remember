@@ -55,6 +55,9 @@ public class NotificacionesHistoricoFragment extends Fragment {
         buscar_notificacion = (SearchView) root.findViewById(R.id.buscar_notificacion_historico);
         no_hay_notificaciones = (TextView) root.findViewById(R.id.no_hay_notificaciones_historicas_historico);
 
+        list_notificaciones.addFooterView(new View(getContext()), null, true);
+        list_notificaciones.addHeaderView(new View(getContext()), null, true);
+
         NotificacionesBD not = new NotificacionesBD(getContext(),"CargarNotificacionesHistoricas"
                 ,no_hay_notificaciones,list_notificaciones,buscar_notificacion);
         not.execute();

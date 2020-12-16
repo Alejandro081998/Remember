@@ -1158,7 +1158,10 @@ public class RutinasBD extends AsyncTask<String, Void, String> {
                     }
                 }
 
-                for(Rutinas rut: listaRutinasUsuario){
+                listaRutinasUsuarioAuxiliar.clear();
+                listaRutinasUsuarioAuxiliar.addAll(listaRutinasUsuario);
+
+                for(Rutinas rut: listaRutinasUsuarioAuxiliar){
 
                     Calendar fechaSeteada = Calendar.getInstance();
                     fechaSeteada.set(fechaActual.get(Calendar.YEAR),fechaActual.get(Calendar.MONTH),

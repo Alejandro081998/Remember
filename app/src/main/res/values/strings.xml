@@ -48,7 +48,7 @@
     <string name="Femenino">Femenino</string>
     <string name="Usuario">Usuario</string>
     <string name="Contraseña">Contraseña</string>
-    <string name="ConfirmarC">Confirmar Contraseña</string>
+    <string name="ConfirmarC">Confirmar</string>
     <string name="Matricula">Numero de Matricula</string>
 
     <string name="Peso">Peso (kg)</string>

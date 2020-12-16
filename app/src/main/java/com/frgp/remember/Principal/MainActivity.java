@@ -171,8 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rutinas.setAlarm(this);
         notificaciones.setAlarm(this);
 
-
-
         /*RutinasBD rutinasBD = new RutinasBD(this,"VerificarRutinas");
         rutinasBD.execute();
 

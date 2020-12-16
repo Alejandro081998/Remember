@@ -46,7 +46,6 @@
                     android:textSize="28dp"
                     android:layout_marginRight="10dp"
                     android:fontFamily="cursive"
-                    android:text="Alejandro9"
                     android:textColor="#403C3C"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold" />
@@ -100,167 +99,150 @@
 
                 <EditText
                     android:id="@+id/txt_perfil_nombre"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_marginRight="200dp"
+                    android:layout_marginRight="80dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorCelesteB"
+                    android:textColorLink="@color/colorCelesteB"
+                    android:textCursorDrawable="@color/colorCelesteB"
                     android:enabled="false"
                     android:inputType="textPersonName"
                     android:gravity="center_horizontal" />
 
                 <EditText
                     android:id="@+id/txt_perfil_apellido"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorCelesteB"
+                    android:textColorLink="@color/colorCelesteB"
+                    android:textCursorDrawable="@color/colorCelesteB"
                     android:enabled="false"
                     android:inputType="textPersonName"
                     android:gravity="center_horizontal" />
 
             </LinearLayout>
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5sp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-                <TableRow
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="100dp"
+                    android:text="@string/DNI"
+                    android:gravity="center_horizontal" />
+
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textStyle="normal"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:text="@string/FN"
+                    android:gravity="center_horizontal" />
+
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txt_perfil_dni"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:enabled="false"
+                android:backgroundTint="@color/colorCelesteB"
+                android:textColorLink="@color/colorCelesteB"
+                android:textCursorDrawable="@color/colorCelesteB"
+                android:inputType="number"
+                android:gravity="center_horizontal" />
+
+
+            <EditText
+                android:id="@+id/txt_perfil_fechanacimiento"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:backgroundTint="@color/colorCelesteB"
+                android:textColorLink="@color/colorCelesteB"
+                android:textCursorDrawable="@color/colorCelesteB"
+                android:inputType="number"
+                android:gravity="center_horizontal" />
+
+
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="normal"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text="@string/Sexo" />
+
+            <RadioGroup
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/radiofem"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60dp"
+                    android:enabled="false"
+                    android:buttonTint="#F2A0D8"
+                    android:text="@string/Femenino" />
 
-
-
-
-
-                </TableRow>
-
-                <TableRow
+                <RadioButton
+                    android:id="@+id/radiomasc"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:buttonTint="@color/colorCelesteB"
+                    android:text="@string/Masculino" />
 
+            </RadioGroup>
 
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <TextView
-                        android:id="@+id/textView27"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/DNI" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <EditText
-                        android:id="@+id/txt_perfil_dni"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="number" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <TextView
-                        android:id="@+id/textView29"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Sexo"/>
-
-                    <TextView
-                        android:id="@+id/textView30"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/FN" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <RadioButton
-                            android:id="@+id/radiofem"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20sp"
-                            android:enabled="false"
-                            android:text="@string/Femenino" />
-
-                        <RadioButton
-                            android:id="@+id/radiomasc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20sp"
-                            android:enabled="false"
-                            android:text="@string/Masculino" />
-
-                    </RadioGroup>
-
-                    <EditText
-                        android:id="@+id/txt_perfil_fechanacimiento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="number" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-
-                </TableRow>
-
-            </TableLayout>
 
             <Button
                 android:id="@+id/btn_ingresos"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginLeft="50sp"
-                android:layout_marginRight="50sp"
-                android:layout_marginBottom="0dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@android:color/transparent"
                 android:onClick="redireccion_recuperar"
                 android:text="@string/Datos_ingreso_mas"
                 android:textColor="#123456"
+                android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textStyle="italic" />
 
@@ -268,9 +250,7 @@
                 android:id="@+id/btn_ficha"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginLeft="50sp"
-                android:layout_marginRight="50sp"
-                android:layout_marginBottom="0dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:onClick="redireccion_recuperar"
@@ -279,268 +259,281 @@
                 android:textAlignment="center"
                 android:textStyle="italic" />
 
-            <TableLayout
-                android:id="@+id/cuadro_ingreso"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:background="@drawable/marco_celeste_foto">
+                android:id="@+id/cuadro_ingreso"
+                android:orientation="vertical">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
                         android:layout_weight="1"
+                        android:layout_marginRight="220dp"
                         android:text="@string/Email" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <EditText
-                        android:id="@+id/txt_perfil_mail"
-                        android:layout_width="224dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="textPersonName" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
 
                     <TextView
                         android:id="@+id/textView32"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:text="@string/Usuario" />
 
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txt_perfil_mail"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="80dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:gravity="center_horizontal" />
 
                     <EditText
                         android:id="@+id/txt_perfil_usuario"
-                        android:layout_width="140dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:ems="10"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
                         android:enabled="false"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:gravity="center_horizontal" />
 
-                </TableRow>
+                </LinearLayout>
 
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView36"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="200dp"
                         android:text="@string/Contraseña" />
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <EditText
-                        android:id="@+id/txt_perfil_contrasena"
-                        android:layout_width="180dp"
-                        android:enabled="false"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPassword" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
 
                     <TextView
                         android:id="@+id/textView35"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:text="@string/ConfirmarC" />
-                </TableRow>
 
+                </LinearLayout>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txt_perfil_contrasena"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="80dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
+                        android:enabled="false"
+                        android:inputType="textPassword"
+                        android:gravity="center_horizontal" />
 
                     <EditText
                         android:id="@+id/txt_perfil_repito"
-                        android:layout_width="50dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
                         android:enabled="false"
-                        android:ems="10"
-                        android:inputType="textPassword" />
-                </TableRow>
+                        android:inputType="textPassword"
+                        android:gravity="center_horizontal" />
 
+                </LinearLayout>
 
-            </TableLayout>
+            </LinearLayout>
 
-            <TableLayout
-                android:id="@+id/cuadro_paciente"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:background="@drawable/marco_celeste_foto">
+                android:id="@+id/cuadro_paciente"
+                android:orientation="vertical">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView33"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
                         android:layout_weight="1"
+                        android:layout_marginRight="220dp"
                         android:text="@string/Peso" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <EditText
-                        android:id="@+id/txt_perfil_peso"
-                        android:layout_width="224dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="numberDecimal" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
 
                     <TextView
                         android:id="@+id/textView34"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:text="@string/Altura" />
 
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txt_perfil_peso"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="80dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"
+                        android:gravity="center_horizontal" />
 
                     <EditText
                         android:id="@+id/txt_perfil_altura"
-                        android:layout_width="140dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:ems="10"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
                         android:enabled="false"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:gravity="center_horizontal" />
 
-                </TableRow>
+                </LinearLayout>
 
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView37"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="160dp"
                         android:text="@string/Factor" />
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
-
-                    <Spinner
-                        android:id="@+id/spinner_factores"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:layout_weight="1" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
 
                     <TextView
                         android:id="@+id/textView39"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
                         android:text="@string/Cabecera" />
-                </TableRow>
 
+                </LinearLayout>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinner_factores"
+                        android:layout_width="200dp"
+                        android:layout_marginRight="80dp"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:layout_weight="1" />
 
                     <EditText
                         android:id="@+id/txt_perfil_medico"
-                        android:layout_width="50dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:ems="10"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorCelesteB"
+                        android:textColorLink="@color/colorCelesteB"
+                        android:textCursorDrawable="@color/colorCelesteB"
                         android:enabled="false"
-                        android:inputType="textPersonName" />
-                </TableRow>
+                        android:inputType="textPersonName"
+                        android:gravity="center_horizontal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
-            </TableLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/vinculaciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="9dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginRight="12dp"
                     android:text="@string/vinculaciones"
                     android:textSize="25dp"
                     android:textStyle="italic" />
@@ -549,18 +542,14 @@
                         android:id="@+id/btn_nueva_vinculacion"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
+                        android:layout_marginLeft="180dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginStart="110dp"
-                        android:layout_marginLeft="110dp"
                         android:textStyle="bold"
                         android:textSize="25dp"
                         android:background="@android:color/transparent"
                         android:text="@string/adicionar" />
 
-
-                </TableRow>
-
-            </TableLayout>
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/no_hay_vinculaciones"

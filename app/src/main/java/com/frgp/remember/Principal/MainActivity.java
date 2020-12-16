@@ -1,6 +1,10 @@
 package com.frgp.remember.Principal;
 
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
@@ -10,15 +14,12 @@ import com.frgp.remember.Dialogos.DialogoRecuperaciones;
 import com.frgp.remember.Dialogos.EditarContacto;
 import com.frgp.remember.Dialogos.NuevoContacto;
 import com.frgp.remember.Entidades.Contactos;
-import com.frgp.remember.Entidades.ListaNegra;
 import com.frgp.remember.Entidades.Usuarios;
 import com.frgp.remember.R;
 import com.frgp.remember.IniciarSesion.iniciar_sesion;
-import com.frgp.remember.Servicio.SegundoPlano;
 import com.frgp.remember.ServicioAlarmas.Alarma;
 import com.frgp.remember.ServicioNotificaciones.Alarm;
 import com.frgp.remember.Session.Session;
-import com.frgp.remember.ui.Ayuda.AyudaFragment;
 import com.frgp.remember.ui.ListaNegra.ListaNegraFragment;
 import com.frgp.remember.ui.Notificaciones.Actividades.Calendario.CalendarioFragment;
 import com.frgp.remember.ui.Notificaciones.Actividades.Hora.HoraFragment;
@@ -47,7 +48,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.frgp.remember.ui.Rutinas.Editar.EditarRutinaFragment;
 import com.frgp.remember.ui.Rutinas.NuevaRutina.NuevaRutinaFragment;
 import com.frgp.remember.ui.Rutinas.Raiz.RutinasFragment;
-import com.frgp.remember.ui.Rutinas.Supervisores.SeleccionPacienteRutinaFragment;
 import com.frgp.remember.ui.Seguimiento.Detalle.DetallePerfilFragment;
 import com.frgp.remember.ui.Seguimiento.Raiz.SeguimientoFragment;
 //import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,7 +66,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Session ses = new Session();
         ses.setCt(this);
         ses.cargar_session();
+
+        registerReceiver(broadcastReceiverNotificaciones, new IntentFilter("LLAMO_NOTI"));
+        registerReceiver(broadcastReceiverRutinas, new IntentFilter("LLAMO_RUTI"));
 
         if(ses.getUsuario().equals("")){
             Intent intent = new Intent(this,iniciar_sesion.class);
@@ -166,8 +168,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rutinas = new Alarma();
         notificaciones = new Alarm();
 
-        rutinas.setAlarm(getApplicationContext());
-        notificaciones.setAlarm(getApplicationContext());
+        rutinas.setAlarm(this);
+        notificaciones.setAlarm(this);
 
 
 
@@ -193,6 +195,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+    BroadcastReceiver broadcastReceiverNotificaciones = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("NOTIFICACIONESMAIN", "PASO POR ACA: ");
+            NotificacionesBD nt = new NotificacionesBD(MainActivity.this,"VerificarNotificaciones");
+            nt.execute();
+        }
+    };
+
+    BroadcastReceiver broadcastReceiverRutinas = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("RUTINASMAIN", "PASO POR ACA: ");
+            RutinasBD rutinasBD = new RutinasBD(MainActivity.this,"VerificarRutinas");
+            rutinasBD.execute();
+        }
+    };
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -324,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
@@ -355,8 +376,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_cerrar) {
             ses.setCt(this);
             ses.cerrar_session();
+            unregisterReceiver(broadcastReceiverNotificaciones);
+            unregisterReceiver(broadcastReceiverRutinas);
             notificaciones.cancelAlarm(getApplicationContext());
             rutinas.cancelAlarm(getApplicationContext());
+                String ns = Context.NOTIFICATION_SERVICE;
+                NotificationManager nMgr = (NotificationManager) this.getSystemService(ns);
+                nMgr.cancelAll();
             Intent intent = new Intent(this, iniciar_sesion.class);
             startActivity(intent);
         } else if (id == R.id.nav_seguimiento) {
@@ -371,7 +397,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
 
             }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

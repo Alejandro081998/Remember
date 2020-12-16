@@ -12,10 +12,13 @@ import android.util.Log;
 import com.frgp.remember.Base.Notificaciones.NotificacionesBD;
 import com.frgp.remember.Base.Rutinas.RutinasBD;
 import com.frgp.remember.Entidades.Rutinas;
+import com.frgp.remember.Principal.MainActivity;
+import com.frgp.remember.Session.Session;
 
 public class Alarma extends BroadcastReceiver
 {
     private static final String CHANNEL_ID = "1234";
+
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -24,8 +27,7 @@ public class Alarma extends BroadcastReceiver
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
 
-        RutinasBD rutinasBD = new RutinasBD(context,"VerificarRutinas");
-        rutinasBD.execute();
+        context.sendBroadcast(new Intent("LLAMO_RUTI"));
 
         Log.d("ALARMARUTINAS", "PASA: ");
         wl.release();
@@ -37,14 +39,14 @@ public class Alarma extends BroadcastReceiver
     {
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarma.class);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 1234, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 1234, i, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 30*1000*1 , pi); // Millisec * Second * Minute
     }
 
     public void cancelAlarm(Context context)
     {
         Intent intent = new Intent(context, Alarma.class);
-        PendingIntent sender = PendingIntent.getBroadcast(context, 1234, intent, PendingIntent.FLAG_NO_CREATE);
+        PendingIntent sender = PendingIntent.getBroadcast(context, 1234, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
     }
